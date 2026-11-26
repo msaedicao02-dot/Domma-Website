@@ -88,6 +88,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* ============ Tríptico (com capas) ============ */
 .triptych{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:var(--border)}
+/* Card em foco cresce na largura e os outros encolhem (como na referência) */
+@media (min-width:961px){
+  .triptych{display:flex}
+  .triptych__item{flex:1 1 0;min-width:0;transition:flex-grow .7s var(--ease)}
+  .triptych__item:hover,.triptych__item:focus-within{flex-grow:1.32}
+}
+@media (min-width:961px) and (prefers-reduced-motion:reduce){.triptych__item{transition:none}}
 .triptych__item{position:relative;overflow:hidden;height:700px;background:var(--color-noir)}
 .triptych__item+.triptych__item{border-left:1px solid var(--color-line-light)}
 .triptych__media{position:absolute;inset:0;overflow:hidden}

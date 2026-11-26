@@ -123,6 +123,7 @@ O `tools/verificar-site.mjs` confere tudo isso automaticamente.
 
 - **Vídeo do topo:** dois `<video>` sobrepostos que se alternam com fade; começa sem som (os navegadores bloqueiam som automático); pausa quando sai da tela.
 - **Parallax:** a mídia anda mais devagar que a página dentro da moldura (`.px`, amplitude 6% da altura, escala 1,14).
+- **Cards do Conheça crescem ao passar o mouse:** no computador, o card em foco fica mais largo (`flex-grow:1.32`, 0,7 s) e os outros dois encolhem, como na referência da Chanel. No celular os cards ficam empilhados, sem esse efeito. Para mudar a intensidade, altere o `1.32` em `.triptych__item:hover` no `site.css`.
 - **Luz dourada nas miniaturas:** contorno SVG (`rect` com `pathLength=1`) que se desenha conforme o trecho avança, com um ponto de brilho na ponta; recomeça a cada repetição.
 - **Revelar ao rolar:** elementos `.reveal` aparecem suavemente.
 - **Acessibilidade:** com "reduzir movimento" ligado no aparelho, vídeos não tocam sozinhos, o parallax desliga e as miniaturas ficam com o contorno completo.
@@ -161,6 +162,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v5-fotos | Nova foto do Celina no bloco do perfume; foto da mão com os 3 glosses na capa "Três tons assinatura" |
 | v6-janela | Janela do "Conheça" centralizada e maior: foto à esquerda, texto à direita e link para a seção do produto |
 | v7-fotos-modelos | Modelos nos blocos do Chocolate e do Prisma; grade de produtos troca para foto de campanha ao passar o mouse; aplicação do Chocolate no carrossel |
+| v9-conheca-cresce | Cards do "Conheça" crescem na largura ao passar o mouse (os outros encolhem) |
 
 > As versões v1 a v3 foram feitas antes do Git. Da v4 em diante, cada versão tem uma tag no Git; a versão atual é a última da tabela.
 > A v8 (vídeos dentro das janelas do "Conheça") foi testada e desfeita a pedido; o site voltou exatamente ao estado da v7.
