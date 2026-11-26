@@ -25,6 +25,7 @@ domma-site/
 │       ├── css/
 │       │   ├── tokens.css      ← cores, fontes, tamanhos, espaços (NÃO escreva valores soltos fora daqui)
 │       │   └── site.css        ← estilo de cada seção/componente
+│       ├── fonts/            ← Dafora (títulos e logo): .woff e .ttf
 │       ├── js/
 │       │   └── site.js         ← vídeos, parallax, janelas, carrossel, produtos, glitter, menu, newsletter
 │       ├── img/                ← fotos (1600 px no lado maior) + og-domma.jpg (prévia ao compartilhar)
@@ -155,6 +156,7 @@ O verificador confere tudo isso automaticamente, além de todos os links interno
 
 ## 6. Efeitos (como funcionam)
 
+- **Fontes:** títulos grandes, logo DOMMA e menu do celular usam **Dafora** (`--font-display`, arquivos em `assets/fonts/`, declarada no `tokens.css`); o resto usa Montserrat (`--font-sans`). Para trocar a fonte dos títulos, mude `--font-display` no `tokens.css`.
 - **Vídeo do topo:** dois `<video>` sobrepostos que se alternam com fade; começa sem som (os navegadores bloqueiam som automático); pausa quando sai da tela.
 - **Parallax:** a mídia anda mais devagar que a página dentro da moldura (`.px`, amplitude 6% da altura, escala 1,14).
 - **Cards do Conheça crescem ao passar o mouse:** no computador, o card em foco fica mais largo (`flex-grow:1.32`, 0,7 s) e os outros encolhem. No celular ficam empilhados. Intensidade: o `1.32` em `.triptych__item:hover` no `site.css`.
@@ -215,6 +217,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v20-templates | Design system em `templates/design_system.html`, lendo os tokens do site |
 | v21-estrutura-deploy | Projeto reorganizado para deploy (`public/`, `docs/`, `extras/`); 404, favicon, prévia de compartilhamento, cache e segurança; menu do celular; newsletter no Netlify Forms; correções |
 | v22-celina-modelo | Bloco do Celina (seção Perfumes) com a foto da modelo segurando o perfume |
+| v23-fonte-dafora | Fonte Dafora nos títulos, no logo e no menu do celular; corrige o rodapé que cobria a parte de baixo do cabeçalho |
 
 > As versões v1 a v3 foram feitas antes do Git. A v8 (vídeos nas janelas do "Conheça") foi testada e desfeita.
 

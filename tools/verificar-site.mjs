@@ -41,6 +41,14 @@ const missing = [...refs].filter((r) => !existsSync(join(pub, r)));
 missing.forEach((r) => fail(`arquivo citado não existe: public/${r}`));
 if (!missing.length) ok(`${refs.size} arquivos citados, todos existem em public/`);
 
+// Arquivos citados dentro do CSS com url("../...") (ex.: fontes)
+for (const name of ["tokens.css", "site.css"]) {
+  const src = read(pub, "assets/css", name);
+  for (const m of src.matchAll(/url\(["']?(\.\.\/[^"')]+)["']?\)/g)) {
+    if (!existsSync(join(pub, "assets/css", m[1]))) fail(`${name} cita um arquivo que não existe: ${m[1]}`);
+  }
+}
+
 // Fotos e vídeos que estão em public/ mas ninguém usa (pesam no deploy)
 for (const dir of ["assets/img", "assets/video"]) {
   for (const f of readdirSync(join(pub, dir))) {

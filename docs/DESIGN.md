@@ -58,9 +58,9 @@ Use sempre as variáveis de `tokens.css`. **Nunca escreva HEX direto em componen
 
 ## 3. Tipografia
 
-**Família:** `Montserrat` (Google Fonts, gratuita), pesos 200, 300, 400 e 600. Uma família só para tudo, como nas referências.
+**Títulos e logo (`--font-display`):** `Dafora`, fonte da marca, um peso só (400). Arquivos em `public/assets/fonts/` (`.woff` + `.ttf`). Usada em `display-xl`, `display-l`, `display-m`, no logo DOMMA (cabeçalho e rodapé) e no menu do celular.
+**Textos (`--font-sans`):** `Montserrat` (Google Fonts), pesos 200, 300, 400 e 600: parágrafos, rótulos (eyebrow), botões, menus, grade de produtos.
 **Utilitária:** `Helvetica Neue / Arial` (sistema), só no rodapé e em formulários.
-**Alternativa de display (opcional):** `Lexend Exa` peso 300 para os títulos, se quiser letras mais largas.
 ❌ Não baixe nem use fontes proprietárias de marcas.
 
 | Estilo | Desktop (tam/altura/espaçamento) | Mobile | Peso | Caixa | Uso |
@@ -76,7 +76,7 @@ Use sempre as variáveis de `tokens.css`. **Nunca escreva HEX direto em componen
 | `caption` | 11 / 16 | igual | 300 | normal | Notas legais, asteriscos |
 
 Regras:
-- Títulos `display-*` **sempre** em maiúsculas e peso 300. Nunca negrito.
+- Títulos `display-*` **sempre** em maiúsculas, na Dafora (peso 400, o único que ela tem). Nunca negrito.
 - Máximo de ~3 linhas por título. Quebre títulos longos em 2 linhas de propósito.
 - Todo título de seção vem com um `eyebrow` acima (8px de distância).
 - Texto corrido nunca passa de 460px de largura ao lado de imagem, nem de 780px centralizado.

@@ -322,3 +322,10 @@ main{position:relative;z-index:1;background:var(--color-noir)}
 .mnav nav{display:flex;flex-direction:column}
 .mnav a{padding:var(--space-4) 0;border-bottom:var(--border);font-size:var(--fs-display-m);letter-spacing:var(--ls-display-m);text-transform:uppercase;font-weight:var(--weight-light)}
 .mnav .drawer__close{position:absolute;top:var(--space-4);right:var(--gutter)}
+
+/* ============ Fonte Dafora nos textos maiores ============ */
+/* Títulos (display), logo DOMMA e itens do menu do celular. Dafora tem um peso só (400). */
+.t-display-xl,.t-display-l,.t-display-m,.wordmark,.mnav a{font-family:var(--font-display);font-weight:400}
+
+/* Cabeçalho acima do rodapé fixo (o rodapé "cortina" ocupa a tela toda por trás e cobria a parte de baixo do cabeçalho) */
+.header{position:relative;z-index:2}

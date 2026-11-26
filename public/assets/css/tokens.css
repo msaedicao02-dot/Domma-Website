@@ -6,6 +6,13 @@
 
 /* A fonte Montserrat é carregada pelo <link> no <head> de cada página. */
 
+/* Fonte dos títulos e do logo: Dafora (arquivos em assets/fonts/, um só peso) */
+@font-face{
+  font-family:"Dafora";
+  src:url("../fonts/Dafora.woff") format("woff"),url("../fonts/Dafora.ttf") format("truetype");
+  font-weight:400;font-style:normal;font-display:swap;
+}
+
 :root {
   /* ---------- Cores base ---------- */
   --color-noir: #000000;          /* fundo principal (tema escuro) */
@@ -42,6 +49,7 @@
   --accent: var(--color-gold);
 
   /* ---------- Tipografia ---------- */
+  --font-display: "Dafora", "Montserrat", "Helvetica Neue", Arial, sans-serif; /* títulos grandes e logo */
   --font-sans: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --font-utility: "Helvetica Neue", Helvetica, Arial, sans-serif; /* rodapé e formulários */
 
