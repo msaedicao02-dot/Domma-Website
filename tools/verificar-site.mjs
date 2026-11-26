@@ -24,9 +24,7 @@ const ok = (msg) => console.log("ok    " + msg);
 // 1. Arquivos referenciados
 const refs = new Set();
 for (const src of [html, css, js]) {
-  for (const m of src.matchAll(/["'(]((?:img|video|css|js)\/[^"')\s]+)["')]/g)) {
-    m[1].split(",").forEach((r) => refs.add(r.trim())); // listas como data-videos="a.mp4,b.mp4"
-  }
+  for (const m of src.matchAll(/["'(]((?:img|video|css|js)\/[^"')\s]+)["')]/g)) refs.add(m[1]);
 }
 const missing = [...refs].filter((r) => !existsSync(join(root, r)));
 missing.forEach((r) => fail(`arquivo citado não existe: ${r}`));

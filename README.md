@@ -101,15 +101,7 @@ Em cada `.triptych__item`, troque a `<img>` dentro de `.triptych__media`. O escu
 
 ### Janelas do "Conheça"
 São os `<dialog class="drawer" id="d-...">` logo depois do tríptico. O botão de cada bloco aponta com `data-drawer="d-..."`.
-Cada janela tem duas partes: `.drawer__media` (vídeo do produto à esquerda, 16:9, sem cortes) e `.drawer__text` (texto + link no fim). No celular o vídeo fica em cima e o texto embaixo, em tela cheia.
-O vídeo começa a tocar sem som quando a janela abre e para quando ela fecha; o botão no canto do vídeo liga o som.
-Para trocar o vídeo, mude `data-videos` (e `src`, igual ao primeiro da lista) no `<video class="drawer__video">`. Para tocar mais de um em sequência, separe por vírgula, como nos perfumes: `data-videos="video/intense.mp4,video/celina.mp4"`.
-
-| Janela | Vídeo |
-|---|---|
-| Três tons assinatura (`#d-tons`) | `video/gloss.mp4` |
-| Perfumes de presença (`#d-perfumes`) | `video/intense.mp4` e depois `video/celina.mp4` |
-| Feito para colecionar (`#d-design`) | `video/filme-domma.mp4` (filme da campanha) |
+Cada janela tem duas partes: `.drawer__media` (foto grande à esquerda) e `.drawer__text` (texto + link no fim). No celular a foto fica em cima e o texto embaixo, em tela cheia.
 O link no fim (`.drawer__go`) fecha a janela e leva para a seção indicada no `href`. Fecha também com o botão Fechar, a tecla Esc ou clicando fora.
 
 ### Newsletter
@@ -169,7 +161,6 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v5-fotos | Nova foto do Celina no bloco do perfume; foto da mão com os 3 glosses na capa "Três tons assinatura" |
 | v6-janela | Janela do "Conheça" centralizada e maior: foto à esquerda, texto à direita e link para a seção do produto |
 | v7-fotos-modelos | Modelos nos blocos do Chocolate e do Prisma; grade de produtos troca para foto de campanha ao passar o mouse; aplicação do Chocolate no carrossel |
-| v8-videos-conheca | Vídeo de cada produto dentro das janelas do "Conheça", com botão de som |
 
 > As versões v1 a v3 foram feitas antes do Git; a tag **v4-capas** guarda o estado completo e atual. A partir daqui, cada alteração vira um commit.
 
