@@ -8,7 +8,7 @@
      3. o JavaScript não tem erro de sintaxe.
    Se aparecer "ERRO", não publique: corrija antes.
    ========================================================================= */
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -29,6 +29,18 @@ for (const src of [html, css, js]) {
 const missing = [...refs].filter((r) => !existsSync(join(root, r)));
 missing.forEach((r) => fail(`arquivo citado não existe: ${r}`));
 if (!missing.length) ok(`${refs.size} arquivos citados, todos existem`);
+
+// 1b. Páginas em templates/: links relativos (ex.: ../css/tokens.css) precisam existir
+const tplDir = join(root, "templates");
+if (existsSync(tplDir)) {
+  for (const f of readdirSync(tplDir).filter((n) => n.endsWith(".html"))) {
+    const src = readFileSync(join(tplDir, f), "utf8");
+    const rel = [...src.matchAll(/(?:href|src)="((?:\.\.\/|\.\/)[^"#?]+)"/g)].map((m) => m[1]);
+    const bad = rel.filter((r) => !existsSync(join(tplDir, r)));
+    bad.forEach((r) => fail(`templates/${f}: arquivo não encontrado: ${r}`));
+    if (!bad.length) ok(`templates/${f}: ${rel.length} arquivo(s) ligado(s), todos existem`);
+  }
+}
 
 // 2. IDs e ganchos que o JavaScript usa (não renomeie no HTML)
 const ids = ["hero", "hero-pause", "hero-sound", "film-video", "film-play", "player",

@@ -5,8 +5,8 @@
 
 Arquivos deste sistema:
 - `DESIGN.md`: este documento (regras e componentes)
-- `tokens.css`: **fonte única da verdade** para todos os valores (cores, fontes, tamanhos, espaços, movimento)
-- `styleguide.html`: página de referência visual com todos os componentes prontos
+- `css/tokens.css`: **fonte única da verdade** para todos os valores (cores, fontes, tamanhos, espaços, movimento)
+- `templates/design_system.html`: página de referência visual com todos os componentes prontos (usa `css/tokens.css`)
 
 ---
 
@@ -117,7 +117,7 @@ Distâncias internas padrão:
 
 ## 6. Componentes
 
-> Todos os componentes estão implementados em `styleguide.html`. Use-os como referência exata.
+> Todos os componentes estão implementados em `templates/design_system.html`. Use-os como referência exata.
 
 ### 6.1 Header
 - Fundo preto, altura 104px (desktop) / 56px (mobile).

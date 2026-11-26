@@ -23,7 +23,8 @@ domma-site/
 ├── tools/
 │   └── verificar-site.mjs  ← verificação automática (arquivos, IDs, sintaxe)
 ├── DESIGN.md               ← sistema de design Noir & Or (regras visuais)
-├── styleguide.html         ← vitrine visual dos componentes do sistema
+├── templates/
+│   └── design_system.html  ← vitrine visual do design system (lê ../css/tokens.css)
 ├── .agents/rules/          ← regras que o Antigravity segue automaticamente
 └── README.md               ← este arquivo
 ```
@@ -104,6 +105,9 @@ São os `<dialog class="drawer" id="d-...">` logo depois do tríptico. O botão 
 Cada janela tem duas partes: `.drawer__media` (foto grande à esquerda) e `.drawer__text` (texto + link no fim). No celular a foto fica em cima e o texto embaixo, em tela cheia.
 O link no fim (`.drawer__go`) fecha a janela e leva para a seção indicada no `href`. Fecha também com o botão Fechar, a tecla Esc ou clicando fora.
 
+### Design system (templates/design_system.html)
+Vitrine com cores, tipografia, botões e componentes. Ela **não tem mais cópia dos tokens**: lê `../css/tokens.css`, então qualquer mudança de cor ou fonte no `tokens.css` aparece no site e na vitrine ao mesmo tempo. Se mover a página de pasta, ajuste o `href` do `<link rel="stylesheet">` no topo e rode o verificador.
+
 ### Newsletter
 Hoje mostra a mensagem "Formulário ainda não conectado". Para conectar, troque o trecho final de `js/site.js` (seção Newsletter) pelo envio ao seu serviço de e-mail.
 
@@ -177,6 +181,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v17-em-cena-ordem | "Em cena" começa pelo Celina; página dos glosses com a aplicação do Chocolate + modelo com o Chocolate |
 | v18-pele-tratada | Foto da aplicação do Chocolate trocada pela versão com limpeza de pele (carrossel e grade) |
 | v19-celina-grade | Card do Celina na grade: ao passar o mouse mostra a modelo segurando o perfume |
+| v20-templates | `styleguide.html` movido para `templates/design_system.html`, agora lendo `../css/tokens.css` (antes tinha uma cópia dos tokens); verificador confere os links da pasta `templates/` |
 
 > As versões v1 a v3 foram feitas antes do Git. Da v4 em diante, cada versão tem uma tag no Git; a versão atual é a última da tabela.
 > A v8 (vídeos dentro das janelas do "Conheça") foi testada e desfeita a pedido; o site voltou exatamente ao estado da v7.
