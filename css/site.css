@@ -277,22 +277,6 @@ button.diptych__thumb{cursor:pointer}
 @media (prefers-reduced-motion:reduce){.glitter{opacity:.6}}
 main,.footer{overflow-x:clip}
 
-/* ============ Bordas suaves nas fotos e vídeos ============ */
-/* A imagem "desmancha" no fundo preto em vez de terminar numa linha reta. */
-:root{--feather:7%;--feather-y:14%}
-.diptych__media,.gallery__slide img,.drawer__media,.film__frame{
-  -webkit-mask-image:linear-gradient(to right,transparent,#000 var(--feather),#000 calc(100% - var(--feather)),transparent),linear-gradient(to bottom,transparent,#000 var(--feather),#000 calc(100% - var(--feather)),transparent);
-  -webkit-mask-composite:source-in;
-  mask-image:linear-gradient(to right,transparent,#000 var(--feather),#000 calc(100% - var(--feather)),transparent),linear-gradient(to bottom,transparent,#000 var(--feather),#000 calc(100% - var(--feather)),transparent);
-  mask-composite:intersect}
-.film__frame{--feather:4%}
-.drawer__media{--feather:5%}
-/* Faixas largas e vídeo do topo: suaviza em cima e embaixo */
-.wide{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 var(--feather-y),#000 calc(100% - var(--feather-y)),transparent);mask-image:linear-gradient(to bottom,transparent,#000 var(--feather-y),#000 calc(100% - var(--feather-y)),transparent)}
-.hero__media{-webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent);mask-image:linear-gradient(to bottom,#000 80%,transparent)}
-/* Grade de produtos (fundo claro): cantos levemente arredondados */
-.card__media{border-radius:6px}
-@media (max-width:600px){:root{--feather:5%;--feather-y:10%}}
 
 /* ============ Menu acompanha a rolagem até a última dobra ============ */
 /* O menu agora fica direto dentro de <main>, então o sticky vale para a página toda. */
