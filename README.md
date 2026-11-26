@@ -157,6 +157,7 @@ O verificador confere tudo isso automaticamente, além de todos os links interno
 ## 6. Efeitos (como funcionam)
 
 - **Fontes:** títulos grandes, logo DOMMA e menu do celular usam **Dafora** (`--font-display`, arquivos em `assets/fonts/`, declarada no `tokens.css`); o resto usa Montserrat (`--font-sans`). Para trocar a fonte dos títulos, mude `--font-display` no `tokens.css`.
+- **Blur nas fotos:** no computador, as fotos dos blocos de produto, as capas do "Conheça" e as fotos do carrossel "Em cena" ficam desfocadas e ficam nítidas ao passar o mouse (0,6 s). No celular e em aparelhos sem mouse ficam sempre nítidas. A grade de produtos e os vídeos não têm blur. Intensidade: `--photo-blur` (6 px) no fim do `site.css`. No carrossel, cada foto fica dentro de `<div class="gallery__img">`.
 - **Vídeo do topo:** dois `<video>` sobrepostos que se alternam com fade; começa sem som (os navegadores bloqueiam som automático); pausa quando sai da tela.
 - **Parallax:** a mídia anda mais devagar que a página dentro da moldura (`.px`, amplitude 6% da altura, escala 1,14).
 - **Cards do Conheça crescem ao passar o mouse:** no computador, o card em foco fica mais largo (`flex-grow:1.32`, 0,7 s) e os outros encolhem. No celular ficam empilhados. Intensidade: o `1.32` em `.triptych__item:hover` no `site.css`.
@@ -220,6 +221,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v22-celina-modelo | Bloco do Celina (seção Perfumes) com a foto da modelo segurando o perfume |
 | v23-fonte-dafora | Fonte Dafora nos títulos, no logo e no menu do celular; corrige o rodapé que cobria a parte de baixo do cabeçalho |
 | v24-instagram | Botão do Instagram no rodapé ligado a @dommaoficiall (abre em nova aba) |
+| v25-blur-fotos | Fotos desfocadas que ficam nítidas ao passar o mouse (blocos de produto, capas do Conheça, Em cena) |
 
 > As versões v1 a v3 foram feitas antes do Git. A v8 (vídeos nas janelas do "Conheça") foi testada e desfeita.
 

@@ -329,3 +329,16 @@ main{position:relative;z-index:1;background:var(--color-noir)}
 
 /* Cabeçalho acima do rodapé fixo (o rodapé "cortina" ocupa a tela toda por trás e cobria a parte de baixo do cabeçalho) */
 .header{position:relative;z-index:2}
+
+/* ============ Blur nas fotos: nítidas ao passar o mouse ============ */
+/* Só em computador (aparelhos com mouse). No celular não existe "passar o mouse",
+   então as fotos ficam sempre nítidas. Intensidade: --photo-blur. */
+.gallery__img{overflow:hidden}
+.gallery__img img{transform:scale(1.06)}
+@media (hover:hover) and (pointer:fine){
+  :root{--photo-blur:6px}
+  .diptych__media img,.gallery__img img{filter:blur(var(--photo-blur));transition:filter .6s var(--ease)}
+  .diptych__media:hover img,.gallery__img:hover img{filter:none}
+  .triptych__media img{filter:brightness(.42) blur(var(--photo-blur));transition:filter .6s var(--ease)}
+  .triptych__item:hover .triptych__media img,.triptych__item:focus-within .triptych__media img{filter:brightness(.62)}
+}
