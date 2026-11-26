@@ -360,3 +360,12 @@ main{position:relative;z-index:1;background:var(--color-noir)}
   .scene:not(.is-open) .scene__title{font-size:20px}
 }
 @media (prefers-reduced-motion:reduce){.scene,.scene img,.scene__desc,.scene__title,.scene__num{transition:none}}
+
+/* ============ Vídeo de fundo desfocado num bloco de produto ============ */
+/* Usado no Glam'mor Intense (<article class="diptych diptych--bg">).
+   O vídeo já vem desfocado no arquivo (mais leve que blur no navegador).
+   Força do vídeo: opacity em .diptych__bg video (0.38). Bordas somem no preto pelo ::after. */
+.diptych--bg{position:relative;isolation:isolate;overflow:hidden}
+.diptych__bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.diptych__bg video{width:100%;height:100%;object-fit:cover;opacity:.38;transform:scale(1.08)}
+.diptych__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,var(--color-noir) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 78%,var(--color-noir) 100%),radial-gradient(ellipse at center,rgba(0,0,0,0) 40%,rgba(0,0,0,.55) 100%)}
