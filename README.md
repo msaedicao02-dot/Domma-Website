@@ -37,7 +37,7 @@ Para abrir: dê dois cliques em `index.html` ou, no Antigravity, peça para serv
 | # | Seção | Onde no HTML | O que tem |
 |---|---|---|---|
 | 1 | Cabeçalho | `<header class="header">` | Logo "DOMMA" (texto) no centro; busca, conta, favoritos, sacola |
-| 2 | Barra da coleção (fixa ao rolar) | `.subnav` | A coleção · O filme · Gloss labial · Perfumes · Comprar. No celular vira lista (`#subnav-select`) |
+| 2 | Barra da coleção (acompanha a rolagem até o fim) | `.subnav`, primeiro item dentro de `<main>` | A coleção · O filme · Gloss labial · Perfumes · Comprar. Fica clara sobre seções de fundo claro. No celular vira lista (`#subnav-select`). **Não mova o menu para dentro de uma seção**, senão ele para de acompanhar a rolagem |
 | 3 | Vídeo do topo (hero) | `#hero` | 3 filmes em sequência, sem som: Gloss → Celina → Glam'mor Intense. Linhas de capítulo, botões pausar e som. Parallax |
 | 4 | Título | `.hero__copy` | "Beleza que revela sua presença" + texto + "Assistir ao filme" |
 | 5 | Conheça (tríptico) | `.triptych` | 3 blocos com capa (foto escurecida) que abrem uma janela grande no centro da tela: `#d-tons`, `#d-perfumes`, `#d-design` |
@@ -49,7 +49,7 @@ Para abrir: dê dois cliques em `index.html` ou, no Antigravity, peça para serv
 | 11 | Todos os produtos | `#produtos` | Grade em fundo marfim, gerada por `js/site.js` |
 | 12 | Trilha | `.breadcrumb` | DOMMA • Beleza e perfumaria |
 | 13 | Contato | `.contact` | WhatsApp, Seja afiliada, Newsletter |
-| 14 | Rodapé | `<footer>` | 4 colunas, redes sociais, texto legal |
+| 14 | Rodapé | `<footer>` | 4 colunas, redes sociais, texto legal. Revelado como cortina: a página sobe e mostra o rodapé parado atrás |
 | — | Player | `#player` | Janela que abre os filmes dos produtos |
 
 ---
@@ -126,6 +126,8 @@ O `tools/verificar-site.mjs` confere tudo isso automaticamente.
 - **Cards do Conheça crescem ao passar o mouse:** no computador, o card em foco fica mais largo (`flex-grow:1.32`, 0,7 s) e os outros dois encolhem, como na referência da Chanel. No celular os cards ficam empilhados, sem esse efeito. Para mudar a intensidade, altere o `1.32` em `.triptych__item:hover` no `site.css`.
 - **Glitter dourado sutil:** partículas douradas que cintilam e sobem devagar, desenhadas em `<canvas>` dentro dos elementos `<span class="glitter ...">`. **Parallax:** cada partícula tem uma profundidade e se desloca de leve com o cursor e com a rolagem (as mais "próximas" andam mais). **Brilho no cursor:** ao passar o mouse, as partículas num raio de ~120 px (`HALO` no `js/site.js`) crescem, ficam mais claras, soltam brilho em cruz e aparece um halo dourado suave. Estão ao lado do título principal, no manifesto, no título "O filme", na frase "Uma presença que fica na memória", no título "Em cena" e em volta do logo do rodapé. Só animam quando estão na tela. Para tirar de um lugar, apague o `<span class="glitter ...">`; para mais ou menos brilho, ajuste a quantidade (`/ 2600`) e a opacidade (`0.62`) na seção "Glitter" do `js/site.js`.
 - **Bordas suaves:** as fotos e vídeos em fundo preto "desmancham" no fundo em vez de terminar numa linha reta (máscara em degradê). Blocos de produto, carrossel, filme e janelas do Conheça: 7% em cada borda (`--feather`). Faixas de vídeo: em cima e embaixo (`--feather-y`, 14%). Vídeo do topo: só embaixo. Grade de produtos (fundo claro): cantos arredondados de 6 px. Para deixar mais ou menos suave, mude `--feather` / `--feather-y` no fim do `site.css`.
+- **Rodapé revelado (cortina):** o `<main>` tem fundo preto e fica por cima (`z-index:1`); o rodapé fica preso no fim da tela (`position:sticky; bottom:0`) por trás. Ao chegar no fim, a página sobe e revela o rodapé, como na referência da Chanel. Só vale em telas com 640 px ou mais de altura (em telas baixas o rodapé rola normal). Toda seção nova dentro de `<main>` precisa ter fundo, senão o rodapé aparece por trás.
+- **Menu claro/escuro:** o menu fica escuro sobre fundo preto e claro (`.is-light`) sobre a grade de produtos, a trilha e o contato.
 - **Luz dourada nas miniaturas:** contorno SVG (`rect` com `pathLength=1`) que se desenha conforme o trecho avança, com um ponto de brilho na ponta; recomeça a cada repetição.
 - **Revelar ao rolar:** elementos `.reveal` aparecem suavemente.
 - **Acessibilidade:** com "reduzir movimento" ligado no aparelho, vídeos não tocam sozinhos, o parallax desliga e as miniaturas ficam com o contorno completo.
@@ -168,6 +170,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v10-glitter | Glitter dourado sutil em alguns cantos do site |
 | v11-glitter-interativo | Glitter com parallax (cursor e rolagem) e brilho mais forte perto do cursor |
 | v12-bordas-suaves | Bordas das fotos e vídeos suavizadas no fundo preto; cantos arredondados na grade de produtos |
+| v13-menu-rodape | Menu acompanha a rolagem até a última dobra (claro sobre fundo claro); rodapé revelado como cortina |
 
 > As versões v1 a v3 foram feitas antes do Git. Da v4 em diante, cada versão tem uma tag no Git; a versão atual é a última da tabela.
 > A v8 (vídeos dentro das janelas do "Conheça") foi testada e desfeita a pedido; o site voltou exatamente ao estado da v7.

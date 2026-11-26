@@ -46,29 +46,30 @@
 </header>
 
 <main>
+  <!-- Menu da coleção: acompanha a rolagem até o fim da página -->
+  <nav class="subnav" aria-label="Coleção DOMMA">
+    <div class="subnav__brand"><span>Coleção</span><b>DOMMA</b></div>
+    <div class="subnav__items">
+      <a class="subnav__item is-active" href="#colecao">A coleção</a>
+      <a class="subnav__item" href="#filme">O filme</a>
+      <a class="subnav__item" href="#gloss">Gloss labial</a>
+      <a class="subnav__item" href="#perfumes">Perfumes</a>
+      <a class="subnav__item" href="#produtos">Comprar</a>
+    </div>
+    <label class="subnav__select">
+      <span class="sr">Ir para a seção</span>
+      <select id="subnav-select">
+        <option value="#colecao">A coleção</option>
+        <option value="#filme">O filme</option>
+        <option value="#gloss">Gloss labial</option>
+        <option value="#perfumes">Perfumes</option>
+        <option value="#produtos">Comprar</option>
+      </select>
+      <svg class="icon"><use href="#i-down"/></svg>
+    </label>
+  </nav>
   <!-- ========== SUB-NAV + HERO EM VÍDEO ========== -->
   <section class="hero" id="colecao">
-    <nav class="subnav" aria-label="Coleção DOMMA">
-      <div class="subnav__brand"><span>Coleção</span><b>DOMMA</b></div>
-      <div class="subnav__items">
-        <a class="subnav__item is-active" href="#colecao">A coleção</a>
-        <a class="subnav__item" href="#filme">O filme</a>
-        <a class="subnav__item" href="#gloss">Gloss labial</a>
-        <a class="subnav__item" href="#perfumes">Perfumes</a>
-        <a class="subnav__item" href="#produtos">Comprar</a>
-      </div>
-      <label class="subnav__select">
-        <span class="sr">Ir para a seção</span>
-        <select id="subnav-select">
-          <option value="#colecao">A coleção</option>
-          <option value="#filme">O filme</option>
-          <option value="#gloss">Gloss labial</option>
-          <option value="#perfumes">Perfumes</option>
-          <option value="#produtos">Comprar</option>
-        </select>
-        <svg class="icon"><use href="#i-down"/></svg>
-      </label>
-    </nav>
 
     <div class="hero__media" id="hero">
       <video class="on" muted playsinline preload="auto" poster="img/poster-gloss.jpg" aria-label="Filmes da campanha DOMMA"></video>

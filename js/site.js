@@ -266,8 +266,26 @@
     entries.forEach((e) => { const g = glitters.find((x) => x.box === e.target); g.on = e.isIntersecting; });
   }, { rootMargin: "80px" });
   glitters.forEach((g) => glitterObserver.observe(g.box));
-  const glitterLoop = (t) => { glitters.forEach((g) => { if (g.on) drawGlitter(g, t); }); requestAnimationFrame(glitterLoop); };
+  const mainEl = document.querySelector("main");
+  const glitterLoop = (t) => {
+    const footerShown = mainEl.getBoundingClientRect().bottom < window.innerHeight;
+    glitters.forEach((g) => { if (g.on && (footerShown || !g.box.closest(".footer"))) drawGlitter(g, t); });
+    requestAnimationFrame(glitterLoop);
+  };
   requestAnimationFrame(glitterLoop);
+
+
+  /* ---------- Menu: versão clara sobre seções de fundo claro ---------- */
+  const subnavEl = document.querySelector(".subnav");
+  const lightCheck = () => {
+    const r = subnavEl.getBoundingClientRect();
+    const under = document.elementsFromPoint(r.left + r.width / 2, r.bottom + 2)
+      .find((el) => !subnavEl.contains(el));
+    subnavEl.classList.toggle("is-light", !!(under && under.closest(".theme-ivory, .theme-white, .breadcrumb")));
+  };
+  let navTick = false;
+  window.addEventListener("scroll", () => { if (!navTick) { navTick = true; requestAnimationFrame(() => { navTick = false; lightCheck(); }); } }, { passive: true });
+  lightCheck();
 
   /* ---------- Sub-nav: item ativo e seletor mobile ---------- */
   const links = [...document.querySelectorAll(".subnav__item")];

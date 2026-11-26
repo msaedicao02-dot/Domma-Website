@@ -293,3 +293,20 @@ main,.footer{overflow-x:clip}
 /* Grade de produtos (fundo claro): cantos levemente arredondados */
 .card__media{border-radius:6px}
 @media (max-width:600px){:root{--feather:5%;--feather-y:10%}}
+
+/* ============ Menu acompanha a rolagem até a última dobra ============ */
+/* O menu agora fica direto dentro de <main>, então o sticky vale para a página toda. */
+.subnav{transition:background var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+.subnav.is-light{background:var(--color-cloud);color:var(--color-gold-deep);border-color:var(--color-line-dark)}
+.subnav.is-light .subnav__brand::after{background:var(--color-gold-deep)}
+.subnav.is-light .subnav__item.is-active{border-bottom-color:var(--color-gold-deep)}
+.subnav.is-light .subnav__select select{color:var(--color-gold-deep)}
+.subnav.is-light .subnav__select select option{background:var(--color-cloud)}
+@media (max-width:960px){.subnav.is-light{background:rgba(254,252,250,.85)}}
+
+/* ============ Rodapé revelado (cortina) ============ */
+/* O conteúdo da página sobe como uma cortina e revela o rodapé, que fica parado atrás. */
+main{position:relative;z-index:1;background:var(--color-noir)}
+@media (min-height:640px){
+  .footer{position:sticky;bottom:0;z-index:0}
+}
