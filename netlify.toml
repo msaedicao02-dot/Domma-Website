@@ -1,0 +1,5 @@
+# Configuração para deploy pelo Git (Netlify conectado ao repositório).
+# A pasta que vai para o ar é "public". Não há etapa de build: o site é HTML/CSS/JS puro.
+[build]
+  publish = "public"
+  command = "node tools/verificar-site.mjs"

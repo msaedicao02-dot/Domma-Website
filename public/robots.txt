@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Quando tiver o domínio, acrescente o mapa do site:
+# Sitemap: https://SEU-DOMINIO/sitemap.xml

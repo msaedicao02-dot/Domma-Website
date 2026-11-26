@@ -1,3 +1,10 @@
+# Sistema
 .DS_Store
 Thumbs.db
+
+# Dependências e pacotes gerados
 node_modules/
+*.zip
+
+# Netlify (pasta local da CLI)
+.netlify/

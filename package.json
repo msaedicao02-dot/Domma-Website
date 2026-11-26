@@ -1,0 +1,11 @@
+{
+  "name": "domma-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site da coleção DOMMA (glosses e perfumes). HTML, CSS e JavaScript puros, sem dependências.",
+  "scripts": {
+    "verificar": "node tools/verificar-site.mjs",
+    "dev": "npx serve public",
+    "pacote": "cd public && zip -r ../domma-site-publicar.zip ."
+  }
+}

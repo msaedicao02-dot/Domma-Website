@@ -1,7 +1,7 @@
 # Design System — regras obrigatórias
 
-- A fonte única da verdade visual é @DESIGN.md. Leia antes de qualquer tarefa de interface.
-- Todos os valores (cores, fontes, tamanhos, espaçamentos, raios, sombras, duração de animação) vêm de @css/tokens.css via `var(--...)`. Nunca escreva HEX, px de fonte ou espaçamentos soltos nos componentes.
+- A fonte única da verdade visual é @docs/DESIGN.md. Leia antes de qualquer tarefa de interface.
+- Todos os valores (cores, fontes, tamanhos, espaçamentos, raios, sombras, duração de animação) vêm de @public/assets/css/tokens.css via `var(--...)`. Nunca escreva HEX, px de fonte ou espaçamentos soltos nos componentes.
 - Importe `tokens.css` uma única vez no CSS global do projeto, antes de qualquer outro estilo.
 - Antes de criar um componente, confira se ele já existe em @templates/design_system.html e reproduza a mesma estrutura e as mesmas classes.
 - Títulos: caixa alta, peso 300, letter-spacing dos tokens. Nunca negrito em títulos grandes.

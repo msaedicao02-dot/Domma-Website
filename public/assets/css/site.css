@@ -214,9 +214,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @media (max-width:600px){.footer__cols{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--space-8)}}
 
 /* ============ Revelar ao rolar ============ */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity var(--dur-reveal) var(--ease),transform var(--dur-reveal) var(--ease)}
-.reveal.is-in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+/* Só esconde para animar quando o JavaScript carregou (classe .js no <html>) */
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity var(--dur-reveal) var(--ease),transform var(--dur-reveal) var(--ease)}
+.js .reveal.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
 
 /* ============ Vídeos ============ */
 .btn-play{width:56px;height:56px;border-radius:var(--radius-round);border:1px solid var(--color-gold);color:var(--color-gold);display:grid;place-items:center;background:rgba(0,0,0,.25);transition:transform var(--dur) var(--ease)}
@@ -310,3 +311,14 @@ main{position:relative;z-index:1;background:var(--color-noir)}
 .subnav{transition:background var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease),opacity var(--dur-slow) var(--ease),transform var(--dur-slow) var(--ease)}
 .subnav.is-gone{opacity:0;transform:translateY(-16px);pointer-events:none}
 .breadcrumb{padding-left:max(var(--gutter),calc((100% - var(--container)) / 2));padding-right:max(var(--gutter),calc((100% - var(--container)) / 2))}
+
+/* ============ Acessibilidade: atalho "Pular para o conteúdo" ============ */
+.skip{position:absolute;left:var(--space-4);top:-60px;z-index:200;background:var(--color-gold);color:var(--color-noir);padding:var(--space-3) var(--space-4);font:var(--weight-semibold) var(--fs-label)/1 var(--font-sans);letter-spacing:var(--ls-label);text-transform:uppercase}
+.skip:focus{top:var(--space-4)}
+
+/* ============ Menu do celular ============ */
+.mnav{margin:0;width:100vw;max-width:none;height:100dvh;max-height:none;padding:var(--space-24) var(--gutter) var(--space-10);border:0;background:var(--color-noir);color:var(--color-gold)}
+.mnav[open]{animation:fade var(--dur-slow) var(--ease)}
+.mnav nav{display:flex;flex-direction:column}
+.mnav a{padding:var(--space-4) 0;border-bottom:var(--border);font-size:var(--fs-display-m);letter-spacing:var(--ls-display-m);text-transform:uppercase;font-weight:var(--weight-light)}
+.mnav .drawer__close{position:absolute;top:var(--space-4);right:var(--gutter)}

@@ -5,10 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DOMMA — Coleção</title>
 <meta name="description" content="DOMMA: beleza que revela sua presença. Glosses labiais e perfumes Eau de Parfum.">
-<link rel="stylesheet" href="css/tokens.css">
-<link rel="stylesheet" href="css/site.css">
+<meta name="theme-color" content="#000000">
+
+<!-- Ícones -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Prévia ao compartilhar o link (WhatsApp, Instagram, Facebook).
+     Depois de ter o domínio, troque pelo endereço completo, ex.: https://domma.com.br/assets/img/og-domma.jpg -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DOMMA">
+<meta property="og:title" content="DOMMA — Beleza que revela sua presença">
+<meta property="og:description" content="Glosses de brilho intenso e perfumes marcantes.">
+<meta property="og:image" content="assets/img/og-domma.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Fonte (Montserrat) carregada aqui, e não por @import, para a página abrir mais rápido -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600&display=swap">
+
+<!-- Marca que o JavaScript carregou: sem JS, nada fica escondido -->
+<script>document.documentElement.classList.add("js")</script>
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
@@ -33,19 +60,33 @@
 <!-- ========== HEADER ========== -->
 <header class="header">
   <div class="header__side">
-    <button class="only-m" aria-label="Menu"><svg class="icon"><use href="#i-menu"/></svg></button>
-    <button class="only-m" aria-label="Buscar"><svg class="icon"><use href="#i-search"/></svg></button>
+    <button class="only-m" data-mnav-open aria-label="Abrir menu" aria-controls="mnav"><svg class="icon"><use href="#i-menu"/></svg></button>
+    <a href="#produtos" class="only-m" aria-label="Ver produtos"><svg class="icon"><use href="#i-search"/></svg></a>
   </div>
   <a href="#colecao" class="wordmark" aria-label="DOMMA, início">DOMMA</a>
   <div class="header__side header__side--end">
-    <button class="hide-m" aria-label="Buscar"><svg class="icon"><use href="#i-search"/></svg></button>
+    <a href="#produtos" class="hide-m" aria-label="Ver produtos"><svg class="icon"><use href="#i-search"/></svg></a>
     <a href="#" aria-label="Minha conta"><svg class="icon"><use href="#i-user"/></svg></a>
     <a href="#" class="hide-m" aria-label="Favoritos"><svg class="icon"><use href="#i-star"/></svg></a>
     <a href="#produtos" aria-label="Sacola"><svg class="icon"><use href="#i-bag"/></svg></a>
   </div>
 </header>
 
-<main>
+<!-- ========== MENU DO CELULAR (abre pelo ícone ☰) ========== -->
+<dialog class="mnav" id="mnav" aria-label="Menu">
+  <button class="drawer__close t-label" data-close>Fechar <svg class="icon"><use href="#i-x"/></svg></button>
+  <nav>
+    <a href="#colecao">A coleção</a>
+    <a href="#filme">O filme</a>
+    <a href="#gloss">Gloss labial</a>
+    <a href="#perfumes">Perfumes</a>
+    <a href="#campanha">Em cena</a>
+    <a href="#produtos">Comprar</a>
+    <a href="#contato">Contato</a>
+  </nav>
+</dialog>
+
+<main id="conteudo">
   <!-- Menu da coleção: acompanha a rolagem até o fim da página -->
   <nav class="subnav" aria-label="Coleção DOMMA">
     <div class="subnav__brand"><span>Coleção</span><b>DOMMA</b></div>
@@ -72,7 +113,7 @@
   <section class="hero" id="colecao">
 
     <div class="hero__media" id="hero">
-      <video class="on" muted playsinline preload="auto" poster="img/poster-gloss.jpg" aria-label="Filmes da campanha DOMMA"></video>
+      <video class="on" muted playsinline preload="auto" poster="assets/img/poster-gloss.jpg" aria-label="Filmes da campanha DOMMA"></video>
       <video muted playsinline preload="auto" aria-hidden="true"></video>
       <div class="hero__bar">
         <div class="chapters" role="group" aria-label="Escolher filme">
@@ -98,21 +139,21 @@
   <!-- ========== TRÍPTICO ========== -->
   <section class="triptych" aria-label="Destaques da coleção">
     <article class="triptych__item">
-      <div class="triptych__media"><img src="img/gloss-trio-mao.jpg" alt="Mão segurando os três glosses DOMMA: Berry, Prisma e Chocolate" loading="lazy" style="object-position:50% 60%"></div>
+      <div class="triptych__media"><img src="assets/img/gloss-trio-mao.jpg" alt="Mão segurando os três glosses DOMMA: Berry, Prisma e Chocolate" loading="lazy" style="object-position:50% 60%"></div>
       <div class="triptych__content">
         <div class="reveal"><span class="t-eyebrow">Gloss labial</span><h2 class="t-display-l">Três tons<br>assinatura</h2></div>
         <button class="triptych__cta" data-drawer="d-tons" aria-label="Conheça os três tons"><span class="t-label">Conheça</span><span class="btn-round" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button>
       </div>
     </article>
     <article class="triptych__item">
-      <div class="triptych__media"><img src="img/modelo-glammor-olhar.jpg" alt="Modelo de vestido vermelho com o perfume Glam'mor Intense" loading="lazy" style="object-position:50% 35%"></div>
+      <div class="triptych__media"><img src="assets/img/modelo-glammor-olhar.jpg" alt="Modelo de vestido vermelho com o perfume Glam'mor Intense" loading="lazy" style="object-position:50% 35%"></div>
       <div class="triptych__content">
         <div class="reveal"><span class="t-eyebrow">Eau de parfum</span><h2 class="t-display-l">Perfumes de<br>presença</h2></div>
         <button class="triptych__cta" data-drawer="d-perfumes" aria-label="Conheça os perfumes"><span class="t-label">Conheça</span><span class="btn-round" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button>
       </div>
     </article>
     <article class="triptych__item">
-      <div class="triptych__media"><img src="img/caixas-chocolate-prisma.jpg" alt="Caixas dos glosses DOMMA Chocolate e Prisma" loading="lazy" style="object-position:50% 90%"></div>
+      <div class="triptych__media"><img src="assets/img/caixas-chocolate-prisma.jpg" alt="Caixas dos glosses DOMMA Chocolate e Prisma" loading="lazy" style="object-position:50% 90%"></div>
       <div class="triptych__content">
         <div class="reveal"><span class="t-eyebrow">Design DOMMA</span><h2 class="t-display-l">Feito para<br>colecionar</h2></div>
         <button class="triptych__cta" data-drawer="d-design" aria-label="Conheça o design"><span class="t-label">Conheça</span><span class="btn-round" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button>
@@ -122,7 +163,7 @@
 
   <dialog class="drawer" id="d-tons" aria-labelledby="d-tons-t">
     <button class="drawer__close t-label" data-close>Fechar <svg class="icon"><use href="#i-x"/></svg></button>
-    <div class="drawer__media"><img src="img/caixas-trio.jpg" alt="Caixas dos glosses DOMMA Berry, Chocolate e Prisma" style="object-position:50% 75%"></div>
+    <div class="drawer__media"><img src="assets/img/caixas-trio.jpg" alt="Caixas dos glosses DOMMA Berry, Chocolate e Prisma" style="object-position:50% 75%"></div>
     <div class="drawer__text">
     <span class="t-eyebrow">Gloss labial · 5,5 g</span>
     <h2 class="t-display-l" id="d-tons-t">Três tons assinatura</h2>
@@ -134,7 +175,7 @@
   </dialog>
   <dialog class="drawer" id="d-perfumes" aria-labelledby="d-perf-t">
     <button class="drawer__close t-label" data-close>Fechar <svg class="icon"><use href="#i-x"/></svg></button>
-    <div class="drawer__media"><img src="img/modelo-glammor-perfil.jpg" alt="Modelo de vestido vermelho segurando o perfume Glam'mor Intense" style="object-position:50% 40%"></div>
+    <div class="drawer__media"><img src="assets/img/modelo-glammor-perfil.jpg" alt="Modelo de vestido vermelho segurando o perfume Glam'mor Intense" style="object-position:50% 40%"></div>
     <div class="drawer__text">
     <span class="t-eyebrow">Eau de parfum</span>
     <h2 class="t-display-l" id="d-perf-t">Perfumes de presença</h2>
@@ -145,7 +186,7 @@
   </dialog>
   <dialog class="drawer" id="d-design" aria-labelledby="d-design-t">
     <button class="drawer__close t-label" data-close>Fechar <svg class="icon"><use href="#i-x"/></svg></button>
-    <div class="drawer__media"><img src="img/caixas-chocolate-prisma.jpg" alt="Caixas dos glosses DOMMA Chocolate e Prisma" style="object-position:50% 70%"></div>
+    <div class="drawer__media"><img src="assets/img/caixas-chocolate-prisma.jpg" alt="Caixas dos glosses DOMMA Chocolate e Prisma" style="object-position:50% 70%"></div>
     <div class="drawer__text">
     <span class="t-eyebrow">Design DOMMA</span>
     <h2 class="t-display-l" id="d-design-t">Feito para colecionar</h2>
@@ -166,7 +207,7 @@
       <h2 class="t-display-l">O filme</h2>
     </div>
     <div class="film__frame">
-      <video id="film-video" preload="none" playsinline poster="img/poster-filme-domma.jpg" src="video/filme-domma.mp4"></video>
+      <video id="film-video" preload="none" playsinline poster="assets/img/poster-filme-domma.jpg" src="assets/video/filme-domma.mp4"></video>
       <button class="film__cover" id="film-play" aria-label="Assistir ao filme DOMMA com som">
         <span class="btn-play" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg></span>
         <span class="t-label">Assistir com som · 0:48</span>
@@ -177,11 +218,11 @@
   <!-- ========== DÍPTICOS: GLOSS ========== -->
   <section id="gloss" aria-label="Gloss labial">
     <article class="diptych">
-      <div class="diptych__media"><img src="img/gloss-berry-mao.jpg" alt="Gloss Labial DOMMA 01 Berry em fundo preto" loading="lazy"></div>
+      <div class="diptych__media"><img src="assets/img/gloss-berry-mao.jpg" alt="Gloss Labial DOMMA 01 Berry em fundo preto" loading="lazy"></div>
       <div class="diptych__copy reveal">
         <div class="vthumb-row">
-          <button class="vthumb" data-film="video/gloss.mp4" aria-label="Ver o filme do gloss labial">
-            <video class="vthumb__video" src="video/prev-berry.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <button class="vthumb" data-film="assets/video/gloss.mp4" aria-label="Ver o filme do gloss labial">
+            <video class="vthumb__video" src="assets/video/prev-berry.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
             <svg class="vthumb__ring" viewBox="0 0 140 90" aria-hidden="true"><rect class="vthumb__track" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/><rect class="vthumb__fill" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/><rect class="vthumb__glow" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/></svg>
             <span class="vthumb__play" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg></span>
           </button>
@@ -196,11 +237,11 @@
       </div>
     </article>
     <article class="diptych diptych--reverse">
-      <div class="diptych__media"><img src="img/modelo-gloss-chocolate.jpg" alt="Modelo de olhos fechados segurando o Gloss Labial DOMMA 02 Chocolate junto ao rosto" loading="lazy" style="object-position:50% 40%"></div>
+      <div class="diptych__media"><img src="assets/img/modelo-gloss-chocolate.jpg" alt="Modelo de olhos fechados segurando o Gloss Labial DOMMA 02 Chocolate junto ao rosto" loading="lazy" style="object-position:50% 40%"></div>
       <div class="diptych__copy reveal">
         <div class="vthumb-row">
-          <button class="vthumb" data-film="video/gloss.mp4" aria-label="Ver o filme do gloss labial">
-            <video class="vthumb__video" src="video/prev-chocolate.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <button class="vthumb" data-film="assets/video/gloss.mp4" aria-label="Ver o filme do gloss labial">
+            <video class="vthumb__video" src="assets/video/prev-chocolate.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
             <svg class="vthumb__ring" viewBox="0 0 140 90" aria-hidden="true"><rect class="vthumb__track" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/><rect class="vthumb__fill" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/><rect class="vthumb__glow" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/></svg>
             <span class="vthumb__play" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg></span>
           </button>
@@ -215,11 +256,11 @@
       </div>
     </article>
     <article class="diptych">
-      <div class="diptych__media"><img src="img/modelo-gloss-prisma.jpg" alt="Gloss Labial DOMMA 03 Prisma em primeiro plano, com modelo sorrindo ao fundo" loading="lazy" style="object-position:50% 55%"></div>
+      <div class="diptych__media"><img src="assets/img/modelo-gloss-prisma.jpg" alt="Gloss Labial DOMMA 03 Prisma em primeiro plano, com modelo sorrindo ao fundo" loading="lazy" style="object-position:50% 55%"></div>
       <div class="diptych__copy reveal">
         <div class="vthumb-row">
-          <button class="vthumb" data-film="video/gloss.mp4" aria-label="Ver o filme do gloss labial">
-            <video class="vthumb__video" src="video/prev-prisma.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <button class="vthumb" data-film="assets/video/gloss.mp4" aria-label="Ver o filme do gloss labial">
+            <video class="vthumb__video" src="assets/video/prev-prisma.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
             <svg class="vthumb__ring" viewBox="0 0 140 90" aria-hidden="true"><rect class="vthumb__track" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/><rect class="vthumb__fill" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/><rect class="vthumb__glow" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/></svg>
             <span class="vthumb__play" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg></span>
           </button>
@@ -235,18 +276,18 @@
     </article>
 
     <!-- Faixa de vídeo + frase -->
-    <div class="wide"><video class="autoloop" muted loop playsinline preload="none" poster="img/poster-gloss.jpg" src="video/gloss.mp4" aria-label="Trecho do filme do gloss labial"></video></div>
+    <div class="wide"><video class="autoloop" muted loop playsinline preload="none" poster="assets/img/poster-gloss.jpg" src="assets/video/gloss.mp4" aria-label="Trecho do filme do gloss labial"></video></div>
     <p class="statement t-display-m center reveal">Do toque do gloss ao rastro do perfume</p>
   </section>
 
   <!-- ========== DÍPTICOS: PERFUMES ========== -->
   <section id="perfumes" aria-label="Perfumes">
     <article class="diptych diptych--reverse">
-      <div class="diptych__media"><img src="img/modelo-glammor-spray.jpg" alt="Modelo de vestido vermelho borrifando o perfume Glam'mor Intense" loading="lazy" style="object-position:50% 25%"></div>
+      <div class="diptych__media"><img src="assets/img/modelo-glammor-spray.jpg" alt="Modelo de vestido vermelho borrifando o perfume Glam'mor Intense" loading="lazy" style="object-position:50% 25%"></div>
       <div class="diptych__copy reveal">
         <div class="vthumb-row">
-          <button class="vthumb" data-film="video/intense.mp4" aria-label="Ver o filme do Glam'mor Intense">
-            <video class="vthumb__video" src="video/prev-intense.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <button class="vthumb" data-film="assets/video/intense.mp4" aria-label="Ver o filme do Glam'mor Intense">
+            <video class="vthumb__video" src="assets/video/prev-intense.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
             <svg class="vthumb__ring" viewBox="0 0 140 90" aria-hidden="true"><rect class="vthumb__track" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/><rect class="vthumb__fill" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/><rect class="vthumb__glow" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/></svg>
             <span class="vthumb__play" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg></span>
           </button>
@@ -260,11 +301,11 @@
       </div>
     </article>
     <article class="diptych">
-      <div class="diptych__media"><img src="img/celina-detalhe.jpg" alt="Perfume DOMMA Celina, frasco rosa com tampa lapidada" loading="lazy" style="object-position:50% 60%"></div>
+      <div class="diptych__media"><img src="assets/img/celina-detalhe.jpg" alt="Perfume DOMMA Celina, frasco rosa com tampa lapidada" loading="lazy" style="object-position:50% 60%"></div>
       <div class="diptych__copy reveal">
         <div class="vthumb-row">
-          <button class="vthumb" data-film="video/celina.mp4" aria-label="Ver o filme do Celina">
-            <video class="vthumb__video" src="video/prev-celina.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <button class="vthumb" data-film="assets/video/celina.mp4" aria-label="Ver o filme do Celina">
+            <video class="vthumb__video" src="assets/video/prev-celina.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
             <svg class="vthumb__ring" viewBox="0 0 140 90" aria-hidden="true"><rect class="vthumb__track" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/><rect class="vthumb__fill" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/><rect class="vthumb__glow" x=".5" y=".5" width="139" height="89" rx="5" pathLength="1"/></svg>
             <span class="vthumb__play" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg></span>
           </button>
@@ -278,7 +319,7 @@
       </div>
     </article>
 
-    <div class="wide"><video class="autoloop" muted loop playsinline preload="none" poster="img/poster-intense.jpg" src="video/intense.mp4" aria-label="Trecho do filme do Glam'mor Intense"></video></div>
+    <div class="wide"><video class="autoloop" muted loop playsinline preload="none" poster="assets/img/poster-intense.jpg" src="assets/video/intense.mp4" aria-label="Trecho do filme do Glam'mor Intense"></video></div>
     <p class="statement t-display-m center reveal"><span class="glitter glitter--side-l" aria-hidden="true"></span><span class="glitter glitter--side-r" aria-hidden="true"></span>Uma presença que fica na memória</p>
   </section>
 
@@ -293,20 +334,20 @@
       <button class="gallery__arrow" data-dir="-1" aria-label="Imagens anteriores"><svg class="icon"><use href="#i-left"/></svg></button>
       <div class="gallery__track" id="gallery" tabindex="0" aria-label="Galeria da campanha">
         <div class="gallery__slide">
-          <img src="img/celina-modelo-1.jpg" alt="Modelo segurando o perfume DOMMA Celina junto ao rosto" loading="lazy" style="object-position:50% 45%">
-          <img src="img/celina-modelo-2.jpg" alt="Modelo de olhos fechados com o perfume DOMMA Celina, atrás de uma cortina clara" loading="lazy" style="object-position:55% 45%">
+          <img src="assets/img/celina-modelo-1.jpg" alt="Modelo segurando o perfume DOMMA Celina junto ao rosto" loading="lazy" style="object-position:50% 45%">
+          <img src="assets/img/celina-modelo-2.jpg" alt="Modelo de olhos fechados com o perfume DOMMA Celina, atrás de uma cortina clara" loading="lazy" style="object-position:55% 45%">
         </div>
         <div class="gallery__slide">
-          <img src="img/glammor-maos.jpg" alt="Mãos segurando o perfume Glam'mor Intense" loading="lazy" style="object-position:50% 45%">
-          <img src="img/modelo-glammor-perfil.jpg" alt="Modelo de perfil segurando o perfume Glam'mor Intense" loading="lazy" style="object-position:50% 45%">
+          <img src="assets/img/glammor-maos.jpg" alt="Mãos segurando o perfume Glam'mor Intense" loading="lazy" style="object-position:50% 45%">
+          <img src="assets/img/modelo-glammor-perfil.jpg" alt="Modelo de perfil segurando o perfume Glam'mor Intense" loading="lazy" style="object-position:50% 45%">
         </div>
         <div class="gallery__slide">
-          <img src="img/caixas-trio.jpg" alt="Caixas dos três glosses DOMMA" loading="lazy" style="object-position:50% 78%">
-          <img src="img/caixas-chocolate-prisma.jpg" alt="Caixas dos glosses Chocolate e Prisma" loading="lazy" style="object-position:50% 72%">
+          <img src="assets/img/caixas-trio.jpg" alt="Caixas dos três glosses DOMMA" loading="lazy" style="object-position:50% 78%">
+          <img src="assets/img/caixas-chocolate-prisma.jpg" alt="Caixas dos glosses Chocolate e Prisma" loading="lazy" style="object-position:50% 72%">
         </div>
         <div class="gallery__slide">
-          <img src="img/chocolate-aplicacao.jpg" alt="Aplicação do Gloss Labial DOMMA 02 Chocolate nos lábios" loading="lazy" style="object-position:50% 30%">
-          <img src="img/modelo-gloss-chocolate.jpg" alt="Modelo de olhos fechados segurando o Gloss Labial DOMMA 02 Chocolate junto ao rosto" loading="lazy" style="object-position:50% 40%">
+          <img src="assets/img/chocolate-aplicacao.jpg" alt="Aplicação do Gloss Labial DOMMA 02 Chocolate nos lábios" loading="lazy" style="object-position:50% 30%">
+          <img src="assets/img/modelo-gloss-chocolate.jpg" alt="Modelo de olhos fechados segurando o Gloss Labial DOMMA 02 Chocolate junto ao rosto" loading="lazy" style="object-position:50% 40%">
         </div>
       </div>
       <button class="gallery__arrow" data-dir="1" aria-label="Próximas imagens"><svg class="icon"><use href="#i-right"/></svg></button>
@@ -325,7 +366,7 @@
 
 
   <!-- ========== CONTATO ========== -->
-  <section class="contact theme-white" aria-label="Contato">
+  <section class="contact theme-white" id="contato" aria-label="Contato">
     <div class="contact__grid">
       <div>
         <h2 class="t-small">Fale com a DOMMA</h2>
@@ -337,7 +378,11 @@
         <p>Revenda DOMMA e faça parte da nossa rede de afiliadas.</p>
         <a href="#" class="btn-link btn-link--underline">Quero ser afiliada</a>
       </div>
-      <form id="newsletter" novalidate>
+      <!-- Newsletter pelo Netlify Forms: as inscrições aparecem no painel do Netlify (Forms).
+           Ative "Form detection" em Site configuration > Forms na primeira vez. -->
+      <form id="newsletter" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="empresa" novalidate>
+        <input type="hidden" name="form-name" value="newsletter">
+        <p class="sr"><label>Não preencha: <input name="empresa" tabindex="-1" autocomplete="off"></label></p>
         <h2 class="t-small">Newsletter</h2>
         <p>Receba lançamentos e novidades em primeira mão.</p>
         <label class="field"><span>E-mail</span><input type="email" name="email" autocomplete="email" required></label>
@@ -376,6 +421,6 @@
   <p class="footer__legal">© DOMMA. Insira aqui razão social, CNPJ e endereço da empresa.</p>
 </footer>
 
-<script src="js/site.js"></script>
+<script src="assets/js/site.js"></script>
 </body>
 </html>

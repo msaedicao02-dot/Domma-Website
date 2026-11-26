@@ -4,9 +4,9 @@
 > **É uma referência de estilo, não uma cópia de marca.** Não use logos, nomes, fotos, vídeos ou fontes de nenhuma marca real. Use a marca do projeto.
 
 Arquivos deste sistema:
-- `DESIGN.md`: este documento (regras e componentes)
-- `css/tokens.css`: **fonte única da verdade** para todos os valores (cores, fontes, tamanhos, espaços, movimento)
-- `templates/design_system.html`: página de referência visual com todos os componentes prontos (usa `css/tokens.css`)
+- `docs/DESIGN.md`: este documento (regras e componentes)
+- `public/assets/css/tokens.css`: **fonte única da verdade** para todos os valores (cores, fontes, tamanhos, espaços, movimento)
+- `templates/design_system.html`: página de referência visual com todos os componentes prontos (usa `public/assets/css/tokens.css`)
 
 ---
 

@@ -1,0 +1,16 @@
+# Regras do Netlify para todas as páginas (funciona no arrastar-e-soltar e no Git)
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# HTML sempre atualizado (sem cache longo)
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Fotos, vídeos, CSS e JS ficam guardados no navegador por 7 dias.
+# Se trocar um arquivo mantendo o mesmo nome, quem já visitou pode ver a versão antiga por até 7 dias.
+/assets/*
+  Cache-Control: public, max-age=604800

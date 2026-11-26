@@ -2,11 +2,11 @@
   /* ---------- Produtos (edite aqui: nome, descrição, foto, link) ---------- */
   const products = [
     // img = foto principal do produto; hover = foto que aparece ao passar o mouse
-    { name: "Gloss Labial 01 Berry", desc: "Vermelho · 5,5 g", img: "img/gloss-berry-mao.jpg", pos: "50% 45%", hover: "img/modelo-gloss-berry.jpg", hpos: "50% 40%" },
-    { name: "Gloss Labial 02 Chocolate", desc: "Marrom cintilante · 5,5 g", img: "img/gloss-chocolate-mao.jpg", pos: "55% 45%", hover: "img/chocolate-aplicacao.jpg", hpos: "50% 12%" },
-    { name: "Gloss Labial 03 Prisma", desc: "Azul cintilante · 5,5 g", img: "img/gloss-prisma-mao.jpg", pos: "50% 50%", hover: "img/modelo-gloss-prisma.jpg", hpos: "50% 60%" },
-    { name: "Glam'mor Intense", desc: "Eau de Parfum · 100 ml", img: "img/glammor-maos-2.jpg", pos: "50% 50%", hover: "img/modelo-glammor-spray.jpg", hpos: "45% 35%" },
-    { name: "Celina", desc: "Eau de Parfum · 75 ml", img: "img/celina-detalhe.jpg", pos: "50% 65%", hover: "img/celina-modelo-1.jpg", hpos: "50% 28%" }
+    { name: "Gloss Labial 01 Berry", desc: "Vermelho · 5,5 g", img: "assets/img/gloss-berry-mao.jpg", pos: "50% 45%", hover: "assets/img/modelo-gloss-berry.jpg", hpos: "50% 40%" },
+    { name: "Gloss Labial 02 Chocolate", desc: "Marrom cintilante · 5,5 g", img: "assets/img/gloss-chocolate-mao.jpg", pos: "55% 45%", hover: "assets/img/chocolate-aplicacao.jpg", hpos: "50% 12%" },
+    { name: "Gloss Labial 03 Prisma", desc: "Azul cintilante · 5,5 g", img: "assets/img/gloss-prisma-mao.jpg", pos: "50% 50%", hover: "assets/img/modelo-gloss-prisma.jpg", hpos: "50% 60%" },
+    { name: "Glam'mor Intense", desc: "Eau de Parfum · 100 ml", img: "assets/img/glammor-maos-2.jpg", pos: "50% 50%", hover: "assets/img/modelo-glammor-spray.jpg", hpos: "45% 35%" },
+    { name: "Celina", desc: "Eau de Parfum · 75 ml", img: "assets/img/celina-detalhe.jpg", pos: "50% 65%", hover: "assets/img/celina-modelo-1.jpg", hpos: "50% 28%" }
   ];
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const grid = document.getElementById("grid");
@@ -47,9 +47,9 @@
 
   /* ---------- HERO: filmes em sequência (sem som; botão para ativar) ---------- */
   const clips = [
-    { src: "video/gloss.mp4", poster: "img/poster-gloss.jpg" },
-    { src: "video/celina.mp4", poster: "img/poster-celina.jpg" },
-    { src: "video/intense.mp4", poster: "img/poster-intense.jpg" }
+    { src: "assets/video/gloss.mp4", poster: "assets/img/poster-gloss.jpg" },
+    { src: "assets/video/celina.mp4", poster: "assets/img/poster-celina.jpg" },
+    { src: "assets/video/intense.mp4", poster: "assets/img/poster-intense.jpg" }
   ];
   const hero = document.getElementById("hero");
   const layers = [...hero.querySelectorAll("video")];
@@ -327,7 +327,9 @@
   });
   track.addEventListener("scroll", () => { count.textContent = `${current() + 1} / ${slides.length}`; }, { passive: true });
 
-  /* ---------- Newsletter (conecte ao seu serviço de e-mail) ---------- */
+  /* ---------- Newsletter (Netlify Forms) ----------
+     No Netlify, a inscrição vai para o painel "Forms" do site.
+     Fora do Netlify (abrindo o arquivo no computador) mostra um aviso. */
   const form = document.getElementById("newsletter");
   const note = document.getElementById("form-note");
   form.addEventListener("submit", (e) => {
@@ -338,6 +340,38 @@
       form.email.focus();
       return;
     }
-    note.textContent = "Formulário ainda não conectado: ligue-o ao seu serviço de e-mail.";
+    if (location.protocol === "file:") {
+      note.textContent = "A inscrição funciona quando o site estiver publicado no Netlify.";
+      return;
+    }
+    const btn = form.querySelector("button[type=submit]");
+    btn.disabled = true;
+    note.textContent = "Enviando…";
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(new FormData(form)).toString()
+    })
+      .then((r) => {
+        if (!r.ok) throw new Error(r.status);
+        form.reset();
+        note.textContent = "Inscrição feita. Obrigada!";
+      })
+      .catch(() => { note.textContent = "Não foi possível enviar agora. Tente de novo em instantes."; })
+      .finally(() => { btn.disabled = false; });
+  });
+
+  /* ---------- Menu do celular ---------- */
+  const mnav = document.getElementById("mnav");
+  document.querySelectorAll("[data-mnav-open]").forEach((b) => b.addEventListener("click", () => mnav.showModal && mnav.showModal()));
+  mnav.querySelector("[data-close]").addEventListener("click", () => mnav.close());
+  mnav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => mnav.close()));
+
+  /* ---------- Links provisórios (href="#") não pulam para o topo ----------
+     Enquanto não houver o endereço real (checkout, WhatsApp, redes...),
+     clicar neles não faz nada. Troque o "#" pelo link para ativar. */
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href="#"]');
+    if (a) e.preventDefault();
   });
 }
