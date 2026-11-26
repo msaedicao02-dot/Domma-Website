@@ -173,6 +173,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v12-bordas-suaves | Bordas das fotos e vídeos suavizadas no fundo preto; cantos arredondados na grade de produtos |
 | v13-menu-rodape | Menu acompanha a rolagem até a última dobra (claro sobre fundo claro); rodapé revelado como cortina |
 | v14-fim-pagina | Menu some ao chegar no rodapé; faixa "DOMMA • Beleza e perfumaria" passou para depois do contato; rodapé ocupa a tela toda menos a faixa |
+| v15-em-cena-celina | Última página do carrossel "Em cena" com duas fotos novas da modelo com o Celina |
 
 > As versões v1 a v3 foram feitas antes do Git. Da v4 em diante, cada versão tem uma tag no Git; a versão atual é a última da tabela.
 > A v8 (vídeos dentro das janelas do "Conheça") foi testada e desfeita a pedido; o site voltou exatamente ao estado da v7.
