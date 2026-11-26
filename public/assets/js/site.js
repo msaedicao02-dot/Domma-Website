@@ -309,23 +309,16 @@
     if (el) sectionObserver.observe(el);
   });
 
-  /* ---------- Carrossel ---------- */
-  const track = document.getElementById("gallery");
-  const slides = [...track.children];
-  const count = document.getElementById("gallery-count");
-  const current = () => Math.round(track.scrollLeft / track.clientWidth);
-  const go = (i) => {
-    const n = (i + slides.length) % slides.length;
-    track.scrollTo({ left: n * track.clientWidth, behavior: "smooth" });
-  };
-  document.querySelectorAll(".gallery__arrow").forEach((b) => {
-    b.addEventListener("click", () => go(current() + Number(b.dataset.dir)));
+  /* ---------- Em cena: painéis que se expandem ----------
+     Computador: o painel cresce ao passar o mouse (CSS).
+     Toque/teclado: tocar ou apertar Enter abre o painel; no celular o primeiro já começa aberto. */
+  const scenes = [...document.querySelectorAll(".scene")];
+  const openScene = (el) => scenes.forEach((s) => s.classList.toggle("is-open", s === el));
+  scenes.forEach((s) => {
+    s.addEventListener("click", () => openScene(s));
+    s.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openScene(s); } });
   });
-  track.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") { e.preventDefault(); go(current() + 1); }
-    if (e.key === "ArrowLeft") { e.preventDefault(); go(current() - 1); }
-  });
-  track.addEventListener("scroll", () => { count.textContent = `${current() + 1} / ${slides.length}`; }, { passive: true });
+  if (window.matchMedia("(max-width: 960px)").matches && scenes[0]) openScene(scenes[0]);
 
   /* ---------- Newsletter (Netlify Forms) ----------
      No Netlify, a inscrição vai para o painel "Forms" do site.
