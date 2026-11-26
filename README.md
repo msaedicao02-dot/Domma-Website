@@ -27,7 +27,7 @@ domma-site/
 │       │   └── site.css        ← estilo de cada seção/componente
 │       ├── fonts/            ← Dafora (títulos e logo): .woff e .ttf
 │       ├── js/
-│       │   └── site.js         ← vídeos, parallax, janelas, carrossel, produtos, glitter, menu, newsletter
+│       │   └── site.js         ← vídeos, parallax, janelas, painéis do Em cena, produtos, glitter, menu, newsletter
 │       ├── img/                ← fotos (1600 px no lado maior) + og-domma.jpg (prévia ao compartilhar)
 │       └── video/              ← vídeos comprimidos para web
 ├── templates/
@@ -79,7 +79,7 @@ Conecte o repositório no Netlify. O `netlify.toml` já diz para publicar `publi
 | 7 | O filme | `#filme` | Filme narrado (48 s) com som, ao clicar |
 | 8 | Glosses | `#gloss` | Berry, Chocolate, Prisma com miniatura de vídeo e luz dourada; faixa de vídeo + frase |
 | 9 | Perfumes | `#perfumes` | Glam'mor Intense e Celina; faixa de vídeo + frase |
-| 10 | Em cena | `#campanha` | Carrossel de 4 páginas: Celina, Glam'mor, caixas, glosses |
+| 10 | Em cena | `#campanha` | 4 painéis que se expandem: 01 Celina, 02 Glam'mor Intense, 03 Três tons (caixas), 04 Chocolate |
 | 11 | Todos os produtos | `#produtos` | Grade em fundo marfim, gerada pelo `site.js` (foto troca ao passar o mouse) |
 | 12 | Contato | `#contato` | WhatsApp, Seja afiliada, Newsletter (Netlify Forms) |
 | 13 | Faixa final | `.breadcrumb` (último item do `<main>`) | "DOMMA • Beleza e perfumaria": no fim é a única coisa visível acima do rodapé |
@@ -146,9 +146,9 @@ Usa o **Netlify Forms** (`data-netlify="true"` no `<form id="newsletter">`). No 
 
 ## 5. O que o JavaScript precisa (NÃO renomear nem apagar)
 
-**IDs:** `hero`, `hero-pause`, `hero-sound`, `film-video`, `film-play`, `player`, `gallery`, `gallery-count`, `grid`, `newsletter`, `form-note`, `subnav-select`, `colecao`, `filme`, `gloss`, `perfumes`, `campanha`, `produtos`, `contato`, `d-tons`, `d-perfumes`, `d-design`, `mnav`, `conteudo`.
+**IDs:** `hero`, `hero-pause`, `hero-sound`, `film-video`, `film-play`, `player`, `grid`, `newsletter`, `form-note`, `subnav-select`, `colecao`, `filme`, `gloss`, `perfumes`, `campanha`, `produtos`, `contato`, `d-tons`, `d-perfumes`, `d-design`, `mnav`, `conteudo`.
 
-**Classes e atributos:** `.chapter` + `data-i`, `data-drawer`, `data-close`, `data-mnav-open`, `.vthumb` (+ `.vthumb__fill`, `.vthumb__glow`), `data-film`, `video.autoloop`, `.gallery__arrow` + `data-dir`, `.gallery__track`, `.subnav`, `.subnav__item`, `.glitter`, `.reveal`, `.hero__media video`, `.diptych__media img`, `.triptych__media img`, `.wide video` (parallax).
+**Classes e atributos:** `.chapter` + `data-i`, `data-drawer`, `data-close`, `data-mnav-open`, `.vthumb` (+ `.vthumb__fill`, `.vthumb__glow`), `data-film`, `video.autoloop`, `.scene` (+ `.scene__text`, `.scene__num`, `.scene__title`, `.scene__desc`, classe `.is-open`), `.subnav`, `.subnav__item`, `.glitter`, `.reveal`, `.hero__media video`, `.diptych__media img`, `.triptych__media img`, `.wide video` (parallax).
 
 O verificador confere tudo isso automaticamente, além de todos os links internos `#secao`.
 
@@ -157,9 +157,10 @@ O verificador confere tudo isso automaticamente, além de todos os links interno
 ## 6. Efeitos (como funcionam)
 
 - **Fontes:** títulos grandes, logo DOMMA e menu do celular usam **Dafora** (`--font-display`, arquivos em `assets/fonts/`, declarada no `tokens.css`); o resto usa Montserrat (`--font-sans`). Para trocar a fonte dos títulos, mude `--font-display` no `tokens.css`.
-- **Blur nas fotos:** no computador, as fotos dos blocos de produto, as capas do "Conheça" e as fotos do carrossel "Em cena" ficam desfocadas e ficam nítidas ao passar o mouse (0,6 s). No celular e em aparelhos sem mouse ficam sempre nítidas. A grade de produtos e os vídeos não têm blur. Intensidade: `--photo-blur` (6 px) no fim do `site.css`. No carrossel, cada foto fica dentro de `<div class="gallery__img">`.
+- **Blur nas fotos:** no computador, as fotos dos blocos de produto, as capas do "Conheça" e os painéis do "Em cena" ficam desfocadas e ficam nítidas ao passar o mouse (0,6 s). No celular e em aparelhos sem mouse ficam sempre nítidas. A grade de produtos e os vídeos não têm blur. Intensidade: `--photo-blur` (6 px) no fim do `site.css`.
 - **Vídeo do topo:** dois `<video>` sobrepostos que se alternam com fade; começa sem som (os navegadores bloqueiam som automático); pausa quando sai da tela.
 - **Parallax:** a mídia anda mais devagar que a página dentro da moldura (`.px`, amplitude 6% da altura, escala 1,14).
+- **Painéis do Em cena (acordeão):** 4 painéis lado a lado (`.scenes` > `.scene`). No computador, o painel com o mouse se abre (`flex-grow:2.6`, 0,8 s), os outros encolhem, e aparecem o título maior e a descrição. Clicar deixa o painel aberto (`.is-open`). No celular (até 960 px) os painéis ficam empilhados como faixas de 132 px; tocar abre o painel e o primeiro já começa aberto. Para trocar foto/texto, edite cada `<article class="scene">` no `index.html` (`object-position` ajusta o enquadramento). Intensidade: o `2.6` no fim do `site.css`.
 - **Cards do Conheça crescem ao passar o mouse:** no computador, o card em foco fica mais largo (`flex-grow:1.32`, 0,7 s) e os outros encolhem. No celular ficam empilhados. Intensidade: o `1.32` em `.triptych__item:hover` no `site.css`.
 - **Glitter dourado:** partículas em `<canvas>` dentro de `<span class="glitter ...">` que cintilam e sobem devagar, com parallax (cursor e rolagem) e brilho mais forte num raio de ~120 px do cursor (`HALO` no `site.js`). Ficam ao lado do título principal, no manifesto, em "O filme", na frase dos perfumes, em "Em cena" e no logo do rodapé. Só animam quando visíveis. Para tirar de um lugar, apague o `<span>`; brilho: quantidade (`/ 2600`) e opacidade (`0.62`) no `site.js`.
 - **Rodapé revelado (cortina):** o `<main>` tem fundo e fica por cima (`z-index:1`); o rodapé fica preso no fim da tela (`position:sticky; bottom:0`). Só vale em telas com 640 px ou mais de altura. **Toda seção nova dentro de `<main>` precisa ter cor de fundo**, senão o rodapé aparece por trás.
@@ -222,6 +223,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v23-fonte-dafora | Fonte Dafora nos títulos, no logo e no menu do celular; corrige o rodapé que cobria a parte de baixo do cabeçalho |
 | v24-instagram | Botão do Instagram no rodapé ligado a @dommaoficiall (abre em nova aba) |
 | v25-blur-fotos | Fotos desfocadas que ficam nítidas ao passar o mouse (blocos de produto, capas do Conheça, Em cena) |
+| v26-em-cena-paineis | Carrossel do "Em cena" trocado por 4 painéis que se expandem (efeito acordeão); celina-modelo-2 e glammor-maos foram para `extras/fotos-sem-uso/` |
 
 > As versões v1 a v3 foram feitas antes do Git. A v8 (vídeos nas janelas do "Conheça") foi testada e desfeita.
 
