@@ -182,7 +182,8 @@ O verificador confere tudo isso automaticamente, além de todos os links interno
 
 - [ ] Preços dos 5 produtos
 - [ ] Logo oficial em SVG/PNG (hoje é "DOMMA" em texto)
-- [ ] Links: checkout/comprar, WhatsApp, Instagram, TikTok, "Seja afiliada", conta, favoritos e links do rodapé (o verificador mostra quantos faltam)
+- [x] Instagram (@dommaoficiall) no rodapé
+- [ ] Links: checkout/comprar, WhatsApp, TikTok, "Seja afiliada", conta, favoritos e links do rodapé (o verificador mostra quantos faltam)
 - [ ] Ativar "Form detection" no Netlify para a newsletter
 - [ ] Domínio próprio e `og:image` com endereço completo
 - [ ] Razão social, CNPJ e endereço no rodapé
@@ -218,6 +219,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v21-estrutura-deploy | Projeto reorganizado para deploy (`public/`, `docs/`, `extras/`); 404, favicon, prévia de compartilhamento, cache e segurança; menu do celular; newsletter no Netlify Forms; correções |
 | v22-celina-modelo | Bloco do Celina (seção Perfumes) com a foto da modelo segurando o perfume |
 | v23-fonte-dafora | Fonte Dafora nos títulos, no logo e no menu do celular; corrige o rodapé que cobria a parte de baixo do cabeçalho |
+| v24-instagram | Botão do Instagram no rodapé ligado a @dommaoficiall (abre em nova aba) |
 
 > As versões v1 a v3 foram feitas antes do Git. A v8 (vídeos nas janelas do "Conheça") foi testada e desfeita.
 
