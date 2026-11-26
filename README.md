@@ -78,7 +78,7 @@ Conecte o repositório no Netlify. O `netlify.toml` já diz para publicar `publi
 | 6 | Manifesto | `.manifesto` | Parágrafo centralizado |
 | 7 | O filme | `#filme` | Filme narrado (48 s) com som, ao clicar |
 | 8 | Glosses | `#gloss` | Berry, Chocolate, Prisma com miniatura de vídeo e luz dourada; faixa de vídeo + frase |
-| 9 | Perfumes | `#perfumes` | Glam'mor Intense e Celina; faixa de vídeo + frase |
+| 9 | Perfumes | `#perfumes` | Glam'mor Intense (com vídeo de fundo desfocado) e Celina; faixa de vídeo + frase |
 | 10 | Em cena | `#campanha` | 4 painéis que se expandem: 01 Celina, 02 Glam'mor Intense, 03 Três tons (caixas), 04 Chocolate |
 | 11 | Todos os produtos | `#produtos` | Grade em fundo marfim, gerada pelo `site.js` (foto troca ao passar o mouse) |
 | 12 | Contato | `#contato` | WhatsApp, Seja afiliada, Newsletter (Netlify Forms) |
@@ -129,6 +129,7 @@ Com o cache de 7 dias (`_headers`), quem já visitou pode ver a foto antiga por 
 | `assets/video/gloss.mp4`, `celina.mp4`, `intense.mp4` | Vídeo do topo, faixas de vídeo e filmes dos produtos |
 | `assets/video/filme-domma.mp4` | Filme narrado (seção "O filme") |
 | `assets/video/prev-*.mp4` | Trechos das miniaturas com luz dourada |
+| `assets/video/glammor-fundo.mp4` | Fundo desfocado do bloco do Glam'mor Intense (já desfocado no arquivo, vai e volta para emendar sem corte) |
 | `assets/img/poster-*.jpg` | Capas dos vídeos antes de carregar |
 | `assets/img/og-domma.jpg` | Imagem que aparece ao compartilhar o link (1200×630) |
 
@@ -161,6 +162,8 @@ O verificador confere tudo isso automaticamente, além de todos os links interno
 - **Vídeo do topo:** dois `<video>` sobrepostos que se alternam com fade; começa sem som (os navegadores bloqueiam som automático); pausa quando sai da tela.
 - **Parallax:** a mídia anda mais devagar que a página dentro da moldura (`.px`, amplitude 6% da altura, escala 1,14).
 - **Painéis do Em cena (acordeão):** 4 painéis lado a lado (`.scenes` > `.scene`). No computador, o painel com o mouse se abre (`flex-grow:2.6`, 0,8 s), os outros encolhem, e aparecem o título maior e a descrição. Clicar deixa o painel aberto (`.is-open`). No celular (até 960 px) os painéis ficam empilhados como faixas de 132 px; tocar abre o painel e o primeiro já começa aberto. Para trocar foto/texto, edite cada `<article class="scene">` no `index.html` (`object-position` ajusta o enquadramento). Intensidade: o `2.6` no fim do `site.css`.
+- **Vídeo de fundo desfocado (Glam'mor Intense):** o bloco do perfume na seção Perfumes tem `class="diptych diptych--bg"` e um `<div class="diptych__bg">` com o vídeo `glammor-fundo.mp4`. O desfoque já vem gravado no vídeo (mais leve para o celular). A força é a `opacity` (0.38) em `.diptych__bg video` no fim do `site.css`; as bordas de cima e de baixo somem no preto. Toca só quando aparece na tela. Para usar em outro produto, copie o `<div class="diptych__bg">`, acrescente `diptych--bg` no `<article>` e gere o vídeo com:
+  `ffmpeg -i ORIGINAL.mp4 -an -filter_complex "[0:v]scale=960:-2,gblur=sigma=9,split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1:a=0,format=yuv420p" -r 24 -c:v libx264 -preset veryfast -crf 30 -movflags +faststart assets/video/NOME-fundo.mp4`
 - **Cards do Conheça crescem ao passar o mouse:** no computador, o card em foco fica mais largo (`flex-grow:1.32`, 0,7 s) e os outros encolhem. No celular ficam empilhados. Intensidade: o `1.32` em `.triptych__item:hover` no `site.css`.
 - **Glitter dourado:** partículas em `<canvas>` dentro de `<span class="glitter ...">` que cintilam e sobem devagar, com parallax (cursor e rolagem) e brilho mais forte num raio de ~120 px do cursor (`HALO` no `site.js`). Ficam ao lado do título principal, no manifesto, em "O filme", na frase dos perfumes, em "Em cena" e no logo do rodapé. Só animam quando visíveis. Para tirar de um lugar, apague o `<span>`; brilho: quantidade (`/ 2600`) e opacidade (`0.62`) no `site.js`.
 - **Rodapé revelado (cortina):** o `<main>` tem fundo e fica por cima (`z-index:1`); o rodapé fica preso no fim da tela (`position:sticky; bottom:0`). Só vale em telas com 640 px ou mais de altura. **Toda seção nova dentro de `<main>` precisa ter cor de fundo**, senão o rodapé aparece por trás.
@@ -224,6 +227,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v24-instagram | Botão do Instagram no rodapé ligado a @dommaoficiall (abre em nova aba) |
 | v25-blur-fotos | Fotos desfocadas que ficam nítidas ao passar o mouse (blocos de produto, capas do Conheça, Em cena) |
 | v26-em-cena-paineis | Carrossel do "Em cena" trocado por 4 painéis que se expandem (efeito acordeão); celina-modelo-2 e glammor-maos foram para `extras/fotos-sem-uso/` |
+| v27-glammor-fundo | Vídeo de fundo desfocado e suave no bloco do Glam'mor Intense |
 
 > As versões v1 a v3 foram feitas antes do Git. A v8 (vídeos nas janelas do "Conheça") foi testada e desfeita.
 
