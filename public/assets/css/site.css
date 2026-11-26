@@ -369,3 +369,14 @@ main{position:relative;z-index:1;background:var(--color-noir)}
 .diptych__bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
 .diptych__bg video{width:100%;height:100%;object-fit:cover;opacity:.38;transform:scale(1.08)}
 .diptych__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,var(--color-noir) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 78%,var(--color-noir) 100%),radial-gradient(ellipse at center,rgba(0,0,0,0) 40%,rgba(0,0,0,.55) 100%)}
+
+/* ============ Títulos que sobem por trás de uma máscara ============ */
+/* O site.js divide os títulos grandes em palavras: <span class="tw"><span class="tw__in">.
+   .tw é a "janela" (esconde o que passa da linha); .tw__in sobe de baixo para cima.
+   O espaço extra em cima/embaixo evita cortar acentos (Ê, Ç) e o apóstrofo.
+   Velocidade: 1.2s abaixo; atraso entre linhas: LINE_DELAY no site.js. */
+.title-mask .tw{display:inline-block;overflow:hidden;vertical-align:top;padding:.16em .04em .18em;margin:-.16em -.04em -.18em}
+.title-mask .tw__in{display:inline-block;transform:translateY(118%);transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
+.title-mask.is-shown .tw__in{transform:none}
+.title-mask:not(.is-shown) .tw__in{transition-duration:0s;transition-delay:0s!important}
+@media (prefers-reduced-motion:reduce){.title-mask .tw__in{transform:none;transition:none}}
