@@ -214,6 +214,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v19-celina-grade | Card do Celina: modelo segurando o perfume ao passar o mouse |
 | v20-templates | Design system em `templates/design_system.html`, lendo os tokens do site |
 | v21-estrutura-deploy | Projeto reorganizado para deploy (`public/`, `docs/`, `extras/`); 404, favicon, prévia de compartilhamento, cache e segurança; menu do celular; newsletter no Netlify Forms; correções |
+| v22-celina-modelo | Bloco do Celina (seção Perfumes) com a foto da modelo segurando o perfume |
 
 > As versões v1 a v3 foram feitas antes do Git. A v8 (vídeos nas janelas do "Conheça") foi testada e desfeita.
 
