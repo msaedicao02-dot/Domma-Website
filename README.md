@@ -162,7 +162,8 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v6-janela | Janela do "Conheça" centralizada e maior: foto à esquerda, texto à direita e link para a seção do produto |
 | v7-fotos-modelos | Modelos nos blocos do Chocolate e do Prisma; grade de produtos troca para foto de campanha ao passar o mouse; aplicação do Chocolate no carrossel |
 
-> As versões v1 a v3 foram feitas antes do Git; a tag **v4-capas** guarda o estado completo e atual. A partir daqui, cada alteração vira um commit.
+> As versões v1 a v3 foram feitas antes do Git. Da v4 em diante, cada versão tem uma tag no Git; a versão atual é a última da tabela.
+> A v8 (vídeos dentro das janelas do "Conheça") foi testada e desfeita a pedido; o site voltou exatamente ao estado da v7.
 
 Comandos úteis (no terminal do Antigravity, dentro da pasta):
 ```bash
