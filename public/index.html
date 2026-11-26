@@ -331,29 +331,46 @@
       <span class="t-eyebrow">Campanha DOMMA</span>
       <h2 class="t-display-l">Em cena</h2>
     </div>
-    <div class="gallery__frame">
-      <button class="gallery__arrow" data-dir="-1" aria-label="Imagens anteriores"><svg class="icon"><use href="#i-left"/></svg></button>
-      <div class="gallery__track" id="gallery" tabindex="0" aria-label="Galeria da campanha">
-        <div class="gallery__slide">
-          <div class="gallery__img"><img src="assets/img/celina-modelo-1.jpg" alt="Modelo segurando o perfume DOMMA Celina junto ao rosto" loading="lazy" style="object-position:50% 45%"></div>
-          <div class="gallery__img"><img src="assets/img/celina-modelo-2.jpg" alt="Modelo de olhos fechados com o perfume DOMMA Celina, atrás de uma cortina clara" loading="lazy" style="object-position:55% 45%"></div>
+    <!-- Painéis "Em cena": o painel com o mouse (ou tocado, no celular) se expande e mostra o texto.
+         Para trocar foto/texto, edite um <article class="scene">. Pode ter de 3 a 5 painéis. -->
+    <div class="scenes">
+      <article class="scene" tabindex="0" aria-label="Celina">
+        <img src="assets/img/celina-modelo-1.jpg" alt="Modelo segurando o perfume DOMMA Celina junto ao rosto" loading="lazy" style="object-position:50% 35%">
+        <div class="scene__text">
+          <span class="scene__num" aria-hidden="true">01</span>
+          <span class="t-eyebrow">Eau de parfum</span>
+          <h3 class="scene__title">Celina</h3>
+          <p class="scene__desc">Frasco rosa de curvas suaves e tampa lapidada como uma joia.</p>
         </div>
-        <div class="gallery__slide">
-          <div class="gallery__img"><img src="assets/img/glammor-maos.jpg" alt="Mãos segurando o perfume Glam'mor Intense" loading="lazy" style="object-position:50% 45%"></div>
-          <div class="gallery__img"><img src="assets/img/modelo-glammor-perfil.jpg" alt="Modelo de perfil segurando o perfume Glam'mor Intense" loading="lazy" style="object-position:50% 45%"></div>
+      </article>
+      <article class="scene" tabindex="0" aria-label="Glam'mor Intense">
+        <img src="assets/img/modelo-glammor-perfil.jpg" alt="Modelo de vermelho segurando o perfume Glam'mor Intense" loading="lazy" style="object-position:50% 40%">
+        <div class="scene__text">
+          <span class="scene__num" aria-hidden="true">02</span>
+          <span class="t-eyebrow">Eau de parfum</span>
+          <h3 class="scene__title">Glam'mor Intense</h3>
+          <p class="scene__desc">Vermelho profundo e tampa dourada, para as noites que pedem intensidade.</p>
         </div>
-        <div class="gallery__slide">
-          <div class="gallery__img"><img src="assets/img/caixas-trio.jpg" alt="Caixas dos três glosses DOMMA" loading="lazy" style="object-position:50% 78%"></div>
-          <div class="gallery__img"><img src="assets/img/caixas-chocolate-prisma.jpg" alt="Caixas dos glosses Chocolate e Prisma" loading="lazy" style="object-position:50% 72%"></div>
+      </article>
+      <article class="scene" tabindex="0" aria-label="Três tons">
+        <img src="assets/img/caixas-trio.jpg" alt="Caixas dos glosses DOMMA Berry, Chocolate e Prisma" loading="lazy" style="object-position:50% 70%">
+        <div class="scene__text">
+          <span class="scene__num" aria-hidden="true">03</span>
+          <span class="t-eyebrow">Gloss labial</span>
+          <h3 class="scene__title">Três tons</h3>
+          <p class="scene__desc">Berry, Chocolate e Prisma em caixas com janela, feitas para colecionar.</p>
         </div>
-        <div class="gallery__slide">
-          <div class="gallery__img"><img src="assets/img/chocolate-aplicacao.jpg" alt="Aplicação do Gloss Labial DOMMA 02 Chocolate nos lábios" loading="lazy" style="object-position:50% 30%"></div>
-          <div class="gallery__img"><img src="assets/img/modelo-gloss-chocolate.jpg" alt="Modelo de olhos fechados segurando o Gloss Labial DOMMA 02 Chocolate junto ao rosto" loading="lazy" style="object-position:50% 40%"></div>
+      </article>
+      <article class="scene" tabindex="0" aria-label="Chocolate">
+        <img src="assets/img/chocolate-aplicacao.jpg" alt="Aplicação do Gloss Labial DOMMA 02 Chocolate nos lábios" loading="lazy" style="object-position:50% 25%">
+        <div class="scene__text">
+          <span class="scene__num" aria-hidden="true">04</span>
+          <span class="t-eyebrow">Gloss labial</span>
+          <h3 class="scene__title">Chocolate</h3>
+          <p class="scene__desc">Marrom profundo com reflexos cintilantes que aquecem os lábios.</p>
         </div>
-      </div>
-      <button class="gallery__arrow" data-dir="1" aria-label="Próximas imagens"><svg class="icon"><use href="#i-right"/></svg></button>
+      </article>
     </div>
-    <p class="t-caption center gallery__count" id="gallery-count" aria-live="polite">1 / 4</p>
   </section>
 
   <!-- ========== GRADE DE PRODUTOS ========== -->
