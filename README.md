@@ -155,6 +155,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v2-videos | Vídeos no topo (3 filmes em sequência), seção "O filme", miniaturas que abrem filmes, faixas de vídeo, fotos da campanha Glam'mor, slogan |
 | v3-efeitos | Parallax ao rolar e luz dourada contornando as miniaturas de vídeo |
 | v4-capas | Capas nos 3 blocos do "Conheça", foto da modelo Berry no carrossel, README, regras e verificador |
+| v5-fotos | Nova foto do Celina no bloco do perfume; foto da mão com os 3 glosses na capa "Três tons assinatura" |
 
 > As versões v1 a v3 foram feitas antes do Git; a tag **v4-capas** guarda o estado completo e atual. A partir daqui, cada alteração vira um commit.
 
