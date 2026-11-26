@@ -31,7 +31,7 @@
   }, { threshold: 0.12 });
   document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
-  /* ---------- Gavetas do tríptico ---------- */
+  /* ---------- Janelas do Conheça (com vídeo do produto) ---------- */
   document.querySelectorAll("[data-drawer]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const d = document.getElementById(btn.dataset.drawer);
@@ -39,11 +39,35 @@
     });
   });
   document.querySelectorAll("dialog.drawer").forEach((d) => {
+    const v = d.querySelector(".drawer__video");
+    const snd = d.querySelector(".drawer__sound");
+    const list = v ? v.dataset.videos.split(",") : [];
+    let n = 0;
+    const setSound = (on) => {
+      v.muted = !on;
+      snd.querySelector("use").setAttribute("href", on ? "#i-sound-on" : "#i-sound-off");
+      snd.setAttribute("aria-label", on ? "Desativar som" : "Ativar som");
+    };
+    if (v) {
+      v.loop = list.length === 1;
+      // Mais de um vídeo (ex.: perfumes): toca um depois do outro
+      v.addEventListener("ended", () => { if (list.length > 1) { n = (n + 1) % list.length; v.src = list[n]; v.play().catch(() => {}); } });
+      snd.addEventListener("click", () => setSound(v.muted));
+      // Toca ao abrir a janela (sem som; a cliente liga no botão)
+      new MutationObserver(() => {
+        if (d.open) { v.preload = "auto"; v.play().catch(() => {}); }
+      }).observe(d, { attributes: true, attributeFilter: ["open"] });
+    }
+    d.addEventListener("close", () => {
+      if (!v) return;
+      v.pause(); setSound(false);
+      n = 0; if (v.getAttribute("src") !== list[0]) v.src = list[0];
+      v.currentTime = 0;
+    });
     d.querySelector("[data-close]").addEventListener("click", () => d.close());
     d.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => d.close()));
     d.addEventListener("click", (e) => { if (e.target === d) d.close(); });
   });
-
 
   /* ---------- HERO: filmes em sequência (sem som; botão para ativar) ---------- */
   const clips = [
