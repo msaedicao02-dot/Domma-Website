@@ -155,15 +155,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* ============ Carrossel ============ */
 .gallery{padding:0 var(--gutter) var(--section-y)}
 .gallery__head{margin-bottom:var(--space-10)}
-.gallery__frame{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:var(--space-6);max-width:var(--container);margin:0 auto}
-.gallery__track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
-.gallery__track::-webkit-scrollbar{display:none}
-.gallery__slide{flex:0 0 100%;scroll-snap-align:center;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4)}
-.gallery__slide img{width:100%;aspect-ratio:4/5;object-fit:cover}
-.gallery__arrow{width:44px;height:44px;display:grid;place-items:center;color:var(--color-gold)}
-.gallery__arrow .icon{width:16px;height:16px}
-.gallery__count{margin-top:var(--space-4)}
-@media (max-width:600px){.gallery__frame{grid-template-columns:minmax(0,1fr)}.gallery__arrow{display:none}.gallery__slide{grid-template-columns:1fr}}
 
 /* ============ Grade de produtos ============ */
 .products{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3fr);gap:var(--space-12);align-items:start;padding:var(--section-y) var(--gutter);background:var(--bg);color:var(--text)}
@@ -333,12 +324,39 @@ main{position:relative;z-index:1;background:var(--color-noir)}
 /* ============ Blur nas fotos: nítidas ao passar o mouse ============ */
 /* Só em computador (aparelhos com mouse). No celular não existe "passar o mouse",
    então as fotos ficam sempre nítidas. Intensidade: --photo-blur. */
-.gallery__img{overflow:hidden}
-.gallery__img img{transform:scale(1.06)}
 @media (hover:hover) and (pointer:fine){
   :root{--photo-blur:6px}
-  .diptych__media img,.gallery__img img{filter:blur(var(--photo-blur));transition:filter .6s var(--ease)}
-  .diptych__media:hover img,.gallery__img:hover img{filter:none}
+  .diptych__media img,.scene img{filter:blur(var(--photo-blur));transition:filter .6s var(--ease),transform 1.2s var(--ease)}
+  .diptych__media:hover img,.scene:hover img,.scene:focus-within img{filter:none}
   .triptych__media img{filter:brightness(.42) blur(var(--photo-blur));transition:filter .6s var(--ease)}
   .triptych__item:hover .triptych__media img,.triptych__item:focus-within .triptych__media img{filter:brightness(.62)}
 }
+
+/* ============ Em cena: painéis que se expandem (acordeão) ============ */
+/* Computador: painéis lado a lado; o painel com o mouse cresce e os outros encolhem.
+   Celular/tablet: painéis empilhados; tocar abre um de cada vez. */
+.scenes{display:flex;gap:10px;height:min(80vh,680px);max-width:var(--container-wide);margin:0 auto}
+.scene{position:relative;flex:1 1 0;min-width:0;overflow:hidden;background:var(--color-noir-soft);cursor:pointer;outline-offset:-2px;transition:flex-grow .8s var(--ease)}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 1.2s var(--ease)}
+.scene::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.35) 38%,rgba(0,0,0,0) 62%);pointer-events:none}
+.scene__text{position:absolute;left:var(--space-6);right:var(--space-6);bottom:var(--space-8);z-index:1;color:var(--color-gold)}
+.scene__num{display:block;font-family:var(--font-display);font-size:64px;line-height:1;margin-bottom:var(--space-4);transition:transform .8s var(--ease)}
+.scene__title{font-family:var(--font-display);font-weight:400;font-size:22px;line-height:1.2;letter-spacing:2px;text-transform:uppercase;transition:font-size .6s var(--ease)}
+.scene__desc{width:min(340px,100%);max-height:0;opacity:0;overflow:hidden;margin-top:var(--space-3);font-size:var(--fs-body);line-height:1.6;color:rgba(205,177,129,.85);transition:opacity .5s var(--ease),max-height .6s var(--ease)}
+.scene.is-open img,.scene:hover img,.scene:focus-within img{transform:scale(1)}
+.scene.is-open .scene__title,.scene:hover .scene__title,.scene:focus-within .scene__title{font-size:30px}
+.scene.is-open .scene__desc,.scene:hover .scene__desc,.scene:focus-within .scene__desc{max-height:140px;opacity:1;transition-delay:.25s}
+@media (min-width:961px){
+  .scene:hover,.scene:focus-within,.scene.is-open{flex-grow:2.6}
+  .scenes:hover .scene.is-open:not(:hover){flex-grow:1}
+}
+@media (max-width:960px){
+  .scenes{flex-direction:column;height:auto;gap:8px}
+  .scene{flex:none;height:132px;transition:height .7s var(--ease)}
+  .scene.is-open{height:min(70vh,520px)}
+  .scene__num{font-size:44px;margin-bottom:var(--space-2)}
+  .scene__text{bottom:var(--space-5);left:var(--space-5);right:var(--space-5)}
+  .scene:not(.is-open) .scene__desc{max-height:0;opacity:0}
+  .scene:not(.is-open) .scene__title{font-size:20px}
+}
+@media (prefers-reduced-motion:reduce){.scene,.scene img,.scene__desc,.scene__title,.scene__num{transition:none}}
