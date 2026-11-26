@@ -40,7 +40,7 @@ Para abrir: dê dois cliques em `index.html` ou, no Antigravity, peça para serv
 | 2 | Barra da coleção (fixa ao rolar) | `.subnav` | A coleção · O filme · Gloss labial · Perfumes · Comprar. No celular vira lista (`#subnav-select`) |
 | 3 | Vídeo do topo (hero) | `#hero` | 3 filmes em sequência, sem som: Gloss → Celina → Glam'mor Intense. Linhas de capítulo, botões pausar e som. Parallax |
 | 4 | Título | `.hero__copy` | "Beleza que revela sua presença" + texto + "Assistir ao filme" |
-| 5 | Conheça (tríptico) | `.triptych` | 3 blocos com capa (foto escurecida) que abrem gavetas: `#d-tons`, `#d-perfumes`, `#d-design` |
+| 5 | Conheça (tríptico) | `.triptych` | 3 blocos com capa (foto escurecida) que abrem uma janela grande no centro da tela: `#d-tons`, `#d-perfumes`, `#d-design` |
 | 6 | Manifesto | `.manifesto` | Parágrafo centralizado |
 | 7 | O filme | `#filme` | Filme narrado (48 s) com som, ao clicar |
 | 8 | Glosses | `#gloss` | 3 blocos imagem + texto (Berry, Chocolate, Prisma) com miniatura de vídeo e luz dourada; faixa de vídeo + frase |
@@ -98,8 +98,10 @@ Para ajustar o enquadramento, mude o `style="object-position:50% 40%"` da imagem
 ### Capas do "Conheça"
 Em cada `.triptych__item`, troque a `<img>` dentro de `.triptych__media`. O escurecimento é automático (`filter:brightness(.42)` no `site.css`).
 
-### Gavetas do "Conheça"
+### Janelas do "Conheça"
 São os `<dialog class="drawer" id="d-...">` logo depois do tríptico. O botão de cada bloco aponta com `data-drawer="d-..."`.
+Cada janela tem duas partes: `.drawer__media` (foto grande à esquerda) e `.drawer__text` (texto + link no fim). No celular a foto fica em cima e o texto embaixo, em tela cheia.
+O link no fim (`.drawer__go`) fecha a janela e leva para a seção indicada no `href`. Fecha também com o botão Fechar, a tecla Esc ou clicando fora.
 
 ### Newsletter
 Hoje mostra a mensagem "Formulário ainda não conectado". Para conectar, troque o trecho final de `js/site.js` (seção Newsletter) pelo envio ao seu serviço de e-mail.
@@ -156,6 +158,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v3-efeitos | Parallax ao rolar e luz dourada contornando as miniaturas de vídeo |
 | v4-capas | Capas nos 3 blocos do "Conheça", foto da modelo Berry no carrossel, README, regras e verificador |
 | v5-fotos | Nova foto do Celina no bloco do perfume; foto da mão com os 3 glosses na capa "Três tons assinatura" |
+| v6-janela | Janela do "Conheça" centralizada e maior: foto à esquerda, texto à direita e link para a seção do produto |
 
 > As versões v1 a v3 foram feitas antes do Git; a tag **v4-capas** guarda o estado completo e atual. A partir daqui, cada alteração vira um commit.
 

@@ -36,6 +36,7 @@
   });
   document.querySelectorAll("dialog.drawer").forEach((d) => {
     d.querySelector("[data-close]").addEventListener("click", () => d.close());
+    d.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => d.close()));
     d.addEventListener("click", (e) => { if (e.target === d) d.close(); });
   });
 
