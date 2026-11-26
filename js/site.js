@@ -1,17 +1,21 @@
 {
   /* ---------- Produtos (edite aqui: nome, descrição, foto, link) ---------- */
   const products = [
-    { name: "Gloss Labial 01 Berry", desc: "Vermelho · 5,5 g", img: "img/gloss-berry-mao.jpg", pos: "50% 45%" },
-    { name: "Gloss Labial 02 Chocolate", desc: "Marrom cintilante · 5,5 g", img: "img/gloss-chocolate-mao.jpg", pos: "55% 45%" },
-    { name: "Gloss Labial 03 Prisma", desc: "Azul cintilante · 5,5 g", img: "img/gloss-prisma-mao.jpg", pos: "50% 50%" },
-    { name: "Glam'mor Intense", desc: "Eau de Parfum · 100 ml", img: "img/glammor-maos-2.jpg", pos: "50% 50%" },
-    { name: "Celina", desc: "Eau de Parfum · 75 ml", img: "img/celina-detalhe.jpg", pos: "50% 65%" }
+    // img = foto principal do produto; hover = foto que aparece ao passar o mouse
+    { name: "Gloss Labial 01 Berry", desc: "Vermelho · 5,5 g", img: "img/gloss-berry-mao.jpg", pos: "50% 45%", hover: "img/modelo-gloss-berry.jpg", hpos: "50% 40%" },
+    { name: "Gloss Labial 02 Chocolate", desc: "Marrom cintilante · 5,5 g", img: "img/gloss-chocolate-mao.jpg", pos: "55% 45%", hover: "img/chocolate-aplicacao.jpg", hpos: "50% 12%" },
+    { name: "Gloss Labial 03 Prisma", desc: "Azul cintilante · 5,5 g", img: "img/gloss-prisma-mao.jpg", pos: "50% 50%", hover: "img/modelo-gloss-prisma.jpg", hpos: "50% 60%" },
+    { name: "Glam'mor Intense", desc: "Eau de Parfum · 100 ml", img: "img/glammor-maos-2.jpg", pos: "50% 50%", hover: "img/modelo-glammor-spray.jpg", hpos: "45% 35%" },
+    { name: "Celina", desc: "Eau de Parfum · 75 ml", img: "img/celina-detalhe.jpg", pos: "50% 65%", hover: "img/celina-caixas.jpg", hpos: "50% 50%" }
   ];
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const grid = document.getElementById("grid");
   grid.innerHTML = products.map((p) => `
     <article class="card reveal">
-      <div class="card__media"><img src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy" style="object-position:${esc(p.pos)}"></div>
+      <div class="card__media">
+        <img src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy" style="object-position:${esc(p.pos)}">
+        ${p.hover ? `<img class="card__hover" src="${esc(p.hover)}" alt="" loading="lazy" style="object-position:${esc(p.hpos)}">` : ""}
+      </div>
       <h3 class="t-small">${esc(p.name)}</h3>
       <p class="card__desc">${esc(p.desc)}</p>
       <a href="#" class="btn-link btn-link--underline">Comprar</a>

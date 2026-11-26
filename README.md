@@ -62,9 +62,10 @@ Edite direto no `index.html`. Títulos grandes ficam em caixa alta automaticamen
 ### Produtos da grade (nome, descrição, foto)
 Só em `js/site.js`, na lista `products` no topo:
 ```js
-{ name: "Celina", desc: "Eau de Parfum · 75 ml", img: "img/celina-detalhe.jpg", pos: "50% 65%" }
+{ name: "Celina", desc: "Eau de Parfum · 75 ml", img: "img/celina-detalhe.jpg", pos: "50% 65%", hover: "img/celina-caixas.jpg", hpos: "50% 50%" }
 ```
-`pos` = qual parte da foto aparece no quadrado (horizontal vertical).
+`img` = foto principal do produto (fundo limpo). `hover` = foto de campanha que aparece ao passar o mouse (opcional).
+`pos` / `hpos` = qual parte de cada foto aparece no quadrado (horizontal vertical).
 
 **Preços:** ainda não existem. Para incluir, acrescente `price: "R$ 000,00"` em cada produto e, no `grid.innerHTML`, a linha `<p class="t-small">${esc(p.price)}</p>` depois da descrição.
 
@@ -159,6 +160,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v4-capas | Capas nos 3 blocos do "Conheça", foto da modelo Berry no carrossel, README, regras e verificador |
 | v5-fotos | Nova foto do Celina no bloco do perfume; foto da mão com os 3 glosses na capa "Três tons assinatura" |
 | v6-janela | Janela do "Conheça" centralizada e maior: foto à esquerda, texto à direita e link para a seção do produto |
+| v7-fotos-modelos | Modelos nos blocos do Chocolate e do Prisma; grade de produtos troca para foto de campanha ao passar o mouse; aplicação do Chocolate no carrossel |
 
 > As versões v1 a v3 foram feitas antes do Git; a tag **v4-capas** guarda o estado completo e atual. A partir daqui, cada alteração vira um commit.
 
