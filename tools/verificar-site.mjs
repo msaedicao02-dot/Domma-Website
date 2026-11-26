@@ -71,7 +71,7 @@ if (existsSync(tplDir)) {
 
 // 3. IDs e ganchos que o JavaScript usa (não renomeie no HTML)
 const ids = ["hero", "hero-pause", "hero-sound", "film-video", "film-play", "player",
-  "gallery", "gallery-count", "grid", "newsletter", "form-note", "subnav-select",
+  "grid", "newsletter", "form-note", "subnav-select",
   "colecao", "filme", "gloss", "perfumes", "campanha", "produtos", "contato",
   "d-tons", "d-perfumes", "d-design", "mnav", "conteudo"];
 let idErr = 0;
@@ -82,7 +82,7 @@ const hooks = [
   ['class="vthumb"', 1, "miniaturas de vídeo com luz dourada"],
   ["data-film=", 1, "botões que abrem filmes"],
   ['class="autoloop"', 1, "faixas de vídeo em loop"],
-  ['class="gallery__arrow"', 2, "setas do carrossel"],
+  ['class="scene"', 3, "painéis do Em cena"],
   ['class="glitter', 1, "glitter dourado"],
   ["data-mnav-open", 1, "botão do menu (celular)"]
 ];
