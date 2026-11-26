@@ -310,3 +310,19 @@ main{position:relative;z-index:1;background:var(--color-noir)}
 @media (min-height:640px){
   .footer{position:sticky;bottom:0;z-index:0}
 }
+
+/* ============ Fim da página igual à referência ============ */
+/* Faixa "DOMMA • Beleza e perfumaria" é o último item do <main>; o rodapé ocupa
+   o resto da tela, então no fim só a faixa branca fica visível acima dele. */
+:root{--crumb-h:56px}
+.breadcrumb{height:var(--crumb-h);padding-top:0;padding-bottom:0}
+@media (min-height:640px){
+  .footer{min-height:calc(100vh - var(--crumb-h));min-height:calc(100svh - var(--crumb-h));display:flex;flex-direction:column;padding-top:var(--space-24)}
+  .footer__brand{margin-bottom:var(--space-24)}
+  .footer__bottom{margin-top:auto}
+  .footer__cols,.footer__bottom,.footer__legal{width:100%}
+}
+/* Menu some quando o rodapé começa a aparecer */
+.subnav{transition:background var(--dur) var(--ease),color var(--dur) var(--ease),border-color var(--dur) var(--ease),opacity var(--dur-slow) var(--ease),transform var(--dur-slow) var(--ease)}
+.subnav.is-gone{opacity:0;transform:translateY(-16px);pointer-events:none}
+.breadcrumb{padding-left:max(var(--gutter),calc((100% - var(--container)) / 2));padding-right:max(var(--gutter),calc((100% - var(--container)) / 2))}

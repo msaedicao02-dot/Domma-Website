@@ -282,6 +282,8 @@
     const under = document.elementsFromPoint(r.left + r.width / 2, r.bottom + 2)
       .find((el) => !subnavEl.contains(el));
     subnavEl.classList.toggle("is-light", !!(under && under.closest(".theme-ivory, .theme-white, .breadcrumb")));
+    // some quando o rodapé começa a aparecer (fim da página)
+    subnavEl.classList.toggle("is-gone", document.querySelector("main").getBoundingClientRect().bottom < window.innerHeight - 2);
   };
   let navTick = false;
   window.addEventListener("scroll", () => { if (!navTick) { navTick = true; requestAnimationFrame(() => { navTick = false; lightCheck(); }); } }, { passive: true });
