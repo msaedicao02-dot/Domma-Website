@@ -62,7 +62,7 @@ Edite direto no `index.html`. Títulos grandes ficam em caixa alta automaticamen
 ### Produtos da grade (nome, descrição, foto)
 Só em `js/site.js`, na lista `products` no topo:
 ```js
-{ name: "Celina", desc: "Eau de Parfum · 75 ml", img: "img/celina-detalhe.jpg", pos: "50% 65%", hover: "img/celina-caixas.jpg", hpos: "50% 50%" }
+{ name: "Celina", desc: "Eau de Parfum · 75 ml", img: "img/celina-detalhe.jpg", pos: "50% 65%", hover: "img/celina-modelo-1.jpg", hpos: "50% 28%" }
 ```
 `img` = foto principal do produto (fundo limpo). `hover` = foto de campanha que aparece ao passar o mouse (opcional).
 `pos` / `hpos` = qual parte de cada foto aparece no quadrado (horizontal vertical).
@@ -176,6 +176,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v16-sem-suavizacao | Bordas suaves das fotos (v12) removidas: fotos e vídeos voltam a ter bordas retas |
 | v17-em-cena-ordem | "Em cena" começa pelo Celina; página dos glosses com a aplicação do Chocolate + modelo com o Chocolate |
 | v18-pele-tratada | Foto da aplicação do Chocolate trocada pela versão com limpeza de pele (carrossel e grade) |
+| v19-celina-grade | Card do Celina na grade: ao passar o mouse mostra a modelo segurando o perfume |
 
 > As versões v1 a v3 foram feitas antes do Git. Da v4 em diante, cada versão tem uma tag no Git; a versão atual é a última da tabela.
 > A v8 (vídeos dentro das janelas do "Conheça") foi testada e desfeita a pedido; o site voltou exatamente ao estado da v7.

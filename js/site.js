@@ -6,7 +6,7 @@
     { name: "Gloss Labial 02 Chocolate", desc: "Marrom cintilante · 5,5 g", img: "img/gloss-chocolate-mao.jpg", pos: "55% 45%", hover: "img/chocolate-aplicacao.jpg", hpos: "50% 12%" },
     { name: "Gloss Labial 03 Prisma", desc: "Azul cintilante · 5,5 g", img: "img/gloss-prisma-mao.jpg", pos: "50% 50%", hover: "img/modelo-gloss-prisma.jpg", hpos: "50% 60%" },
     { name: "Glam'mor Intense", desc: "Eau de Parfum · 100 ml", img: "img/glammor-maos-2.jpg", pos: "50% 50%", hover: "img/modelo-glammor-spray.jpg", hpos: "45% 35%" },
-    { name: "Celina", desc: "Eau de Parfum · 75 ml", img: "img/celina-detalhe.jpg", pos: "50% 65%", hover: "img/celina-caixas.jpg", hpos: "50% 50%" }
+    { name: "Celina", desc: "Eau de Parfum · 75 ml", img: "img/celina-detalhe.jpg", pos: "50% 65%", hover: "img/celina-modelo-1.jpg", hpos: "50% 28%" }
   ];
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const grid = document.getElementById("grid");
