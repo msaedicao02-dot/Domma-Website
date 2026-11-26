@@ -193,6 +193,59 @@
     parallax();
   }
 
+
+  /* ---------- Glitter dourado sutil (partículas que cintilam devagar) ---------- */
+  const GOLDS = ["205,177,129", "246,227,180", "233,207,149"];
+  const glitters = [...document.querySelectorAll(".glitter")].map((box) => {
+    const c = document.createElement("canvas");
+    box.appendChild(c);
+    const ctx = c.getContext("2d");
+    const g = { box, c, ctx, parts: [], on: false, w: 0, h: 0 };
+    const setup = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      g.w = box.clientWidth; g.h = box.clientHeight;
+      c.width = g.w * dpr; c.height = g.h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.round(g.w * g.h / 2600);
+      g.parts = Array.from({ length: n }, () => ({
+        x: Math.random() * g.w, y: Math.random() * g.h,
+        r: 0.5 + Math.random() * 1.2,
+        col: GOLDS[Math.floor(Math.random() * GOLDS.length)],
+        ph: Math.random() * Math.PI * 2, sp: 0.4 + Math.random() * 1.2,
+        vy: -(0.02 + Math.random() * 0.08), vx: (Math.random() - 0.5) * 0.04,
+        star: Math.random() < 0.12
+      }));
+    };
+    setup();
+    window.addEventListener("resize", setup);
+    return g;
+  });
+  const drawGlitter = (g, t) => {
+    const { ctx, w, h } = g;
+    ctx.clearRect(0, 0, w, h);
+    g.parts.forEach((p) => {
+      if (!reduce) { p.x += p.vx; p.y += p.vy; if (p.y < -4) { p.y = h + 4; p.x = Math.random() * w; } }
+      const tw = reduce ? 0.5 : (Math.sin(t / 1000 * p.sp + p.ph) + 1) / 2; // 0..1
+      const a = 0.08 + tw * tw * 0.62;
+      ctx.fillStyle = `rgba(${p.col},${a})`;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      if (p.star && tw > 0.82) {           // brilho em cruz nos picos
+        const L = p.r * 5 * (tw - 0.82) / 0.18;
+        ctx.strokeStyle = `rgba(246,227,180,${a * 0.8})`; ctx.lineWidth = 0.6;
+        ctx.beginPath(); ctx.moveTo(p.x - L, p.y); ctx.lineTo(p.x + L, p.y);
+        ctx.moveTo(p.x, p.y - L); ctx.lineTo(p.x, p.y + L); ctx.stroke();
+      }
+    });
+  };
+  const glitterObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { const g = glitters.find((x) => x.box === e.target); g.on = e.isIntersecting; });
+  });
+  glitters.forEach((g) => glitterObserver.observe(g.box));
+  if (reduce) glitters.forEach((g) => drawGlitter(g, 0));
+  else {
+    const glitterLoop = (t) => { glitters.forEach((g) => { if (g.on) drawGlitter(g, t); }); requestAnimationFrame(glitterLoop); };
+    requestAnimationFrame(glitterLoop);
+  }
+
   /* ---------- Sub-nav: item ativo e seletor mobile ---------- */
   const links = [...document.querySelectorAll(".subnav__item")];
   const select = document.getElementById("subnav-select");

@@ -260,3 +260,19 @@ button.diptych__thumb{cursor:pointer}
 .vthumb__play .icon{width:14px;height:14px;fill:currentColor;stroke:none}
 @media (max-width:600px){.vthumb{width:96px}}
 @media (prefers-reduced-motion:reduce){.vthumb__fill{stroke-dashoffset:0}.vthumb__glow{display:none}}
+
+/* ============ Glitter dourado sutil ============ */
+.hero__copy,.manifesto,.film__head,.statement,.gallery__head,.footer{position:relative;isolation:isolate}
+.glitter{position:absolute;pointer-events:none;z-index:-1;width:300px;height:220px;
+  -webkit-mask-image:radial-gradient(closest-side,#000 35%,transparent);mask-image:radial-gradient(closest-side,#000 35%,transparent)}
+.glitter canvas{display:block;width:100%;height:100%}
+.glitter--hero-l{left:-300px;top:10%}
+.glitter--hero-r{right:-300px;bottom:-10%}
+.glitter--side-l{left:max(-260px,-20vw);top:50%;transform:translateY(-50%)}
+.glitter--side-r{right:max(-260px,-20vw);top:50%;transform:translateY(-50%)}
+.manifesto .glitter--side-r,.statement .glitter--side-r{right:0}
+.statement .glitter--side-l{left:0}
+.glitter--footer{left:50%;top:var(--space-6);transform:translateX(-50%);width:420px;height:160px}
+@media (max-width:960px){.glitter{width:200px;height:150px}.glitter--hero-l{left:-80px;top:-20px}.glitter--hero-r{right:-80px}.glitter--side-l{left:-60px}.glitter--side-r{right:-60px}.glitter--footer{width:280px}}
+@media (prefers-reduced-motion:reduce){.glitter{opacity:.6}}
+main,.footer{overflow-x:clip}
