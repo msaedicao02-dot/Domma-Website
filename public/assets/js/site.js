@@ -31,6 +31,52 @@
   }, { threshold: 0.12 });
   document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
+  /* ---------- Títulos que sobem por trás de uma máscara ----------
+     Cada palavra dos títulos grandes (.t-display-xl / .t-display-l) fica dentro de uma "janela"
+     (.tw, overflow escondido) e sobe de baixo para cima quando o título aparece na tela.
+     As linhas entram em sequência (LINE_DELAY). Quando o título sai totalmente da tela,
+     ele volta a esconder e repete o efeito na próxima vez. Sem JavaScript ou com
+     "reduzir movimento", os títulos aparecem normais. */
+  const LINE_DELAY = 0.14; // segundos entre uma linha e a próxima
+  const titles = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? [] : [...document.querySelectorAll(".t-display-xl, .t-display-l")];
+  const splitTitle = (h) => {
+    h.setAttribute("aria-label", h.textContent.replace(/\s+/g, " ").trim());
+    const parts = [];
+    h.childNodes.forEach((n) => {
+      if (n.nodeType === 3) {
+        n.textContent.split(/(\s+)/).forEach((w) => {
+          if (!w) return;
+          if (/^\s+$/.test(w)) { parts.push(document.createTextNode(" ")); return; }
+          const outer = document.createElement("span");
+          outer.className = "tw"; outer.setAttribute("aria-hidden", "true");
+          const inner = document.createElement("span");
+          inner.className = "tw__in"; inner.textContent = w;
+          outer.appendChild(inner); parts.push(outer);
+        });
+      } else parts.push(n.cloneNode(true));
+    });
+    h.replaceChildren(...parts);
+    h.classList.add("title-mask");
+  };
+  // Atraso por linha: palavras na mesma altura entram juntas.
+  const setLineDelays = (h) => {
+    let line = -1, lastTop = null;
+    h.querySelectorAll(".tw").forEach((w) => {
+      const top = w.offsetTop;
+      if (lastTop === null || Math.abs(top - lastTop) > 4) { line++; lastTop = top; }
+      w.firstChild.style.transitionDelay = `${line * LINE_DELAY}s`;
+    });
+  };
+  titles.forEach(splitTitle);
+  const titleObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      const h = e.target;
+      if (e.intersectionRatio >= 0.3) { setLineDelays(h); h.classList.add("is-shown"); }
+      else if (!e.isIntersecting) h.classList.remove("is-shown");
+    });
+  }, { threshold: [0, 0.3] });
+  titles.forEach((h) => titleObserver.observe(h));
+
   /* ---------- Gavetas do tríptico ---------- */
   document.querySelectorAll("[data-drawer]").forEach((btn) => {
     btn.addEventListener("click", () => {
