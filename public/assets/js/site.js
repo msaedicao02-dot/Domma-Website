@@ -2,11 +2,11 @@
   /* ---------- Produtos (edite aqui: nome, descrição, foto, link) ---------- */
   const products = [
     // img = foto principal do produto; hover = foto que aparece ao passar o mouse
+    { name: "Glam'mor Intense", desc: "Eau de Parfum · 100 ml", img: "assets/img/glammor-maos-2.jpg", pos: "50% 50%", hover: "assets/img/modelo-glammor-spray.jpg", hpos: "45% 35%" },
+    { name: "Celina", desc: "Eau de Parfum · 75 ml", img: "assets/img/celina-detalhe.jpg", pos: "50% 65%", hover: "assets/img/celina-modelo-1.jpg", hpos: "50% 28%" },
     { name: "Gloss Labial 01 Berry", desc: "Vermelho · 5,5 g", img: "assets/img/gloss-berry-mao.jpg", pos: "50% 45%", hover: "assets/img/modelo-gloss-berry.jpg", hpos: "50% 40%" },
     { name: "Gloss Labial 02 Chocolate", desc: "Marrom cintilante · 5,5 g", img: "assets/img/gloss-chocolate-mao.jpg", pos: "55% 45%", hover: "assets/img/chocolate-aplicacao.jpg", hpos: "50% 12%" },
-    { name: "Gloss Labial 03 Prisma", desc: "Azul cintilante · 5,5 g", img: "assets/img/gloss-prisma-mao.jpg", pos: "50% 50%", hover: "assets/img/modelo-gloss-prisma.jpg", hpos: "50% 60%" },
-    { name: "Glam'mor Intense", desc: "Eau de Parfum · 100 ml", img: "assets/img/glammor-maos-2.jpg", pos: "50% 50%", hover: "assets/img/modelo-glammor-spray.jpg", hpos: "45% 35%" },
-    { name: "Celina", desc: "Eau de Parfum · 75 ml", img: "assets/img/celina-detalhe.jpg", pos: "50% 65%", hover: "assets/img/celina-modelo-1.jpg", hpos: "50% 28%" }
+    { name: "Gloss Labial 03 Prisma", desc: "Azul cintilante · 5,5 g", img: "assets/img/gloss-prisma-mao.jpg", pos: "50% 50%", hover: "assets/img/modelo-gloss-prisma.jpg", hpos: "50% 60%" }
   ];
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const grid = document.getElementById("grid");
@@ -146,9 +146,9 @@
 
   /* ---------- HERO: filmes em sequência (sem som; botão para ativar) ---------- */
   const clips = [
-    { src: "assets/video/gloss.mp4", poster: "assets/img/poster-gloss.jpg" },
     { src: "assets/video/celina.mp4", poster: "assets/img/poster-celina.jpg" },
-    { src: "assets/video/intense.mp4", poster: "assets/img/poster-intense.jpg" }
+    { src: "assets/video/intense.mp4", poster: "assets/img/poster-intense.jpg" },
+    { src: "assets/video/gloss.mp4", poster: "assets/img/poster-gloss.jpg" }
   ];
   const hero = document.getElementById("hero");
   const layers = [...hero.querySelectorAll("video")];

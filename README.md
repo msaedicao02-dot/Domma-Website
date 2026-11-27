@@ -71,14 +71,14 @@ Conecte o repositório no Netlify. O `netlify.toml` já diz para publicar `publi
 |---|---|---|---|
 | 1 | Cabeçalho | `<header class="header">` | Logo "DOMMA" no centro; menu ☰ (celular), lupa (leva aos produtos), conta, favoritos, sacola |
 | — | Menu do celular | `#mnav` | Lista de seções em tela cheia, abre pelo ☰ |
-| 2 | Barra da coleção | `.subnav`, primeiro item dentro de `<main>` | A coleção · O filme · Gloss labial · Perfumes · Comprar. Acompanha a rolagem, fica clara sobre fundo claro e some no rodapé. No celular vira lista (`#subnav-select`). **Não mova o menu para dentro de uma seção** |
-| 3 | Vídeo do topo | `#hero` | 3 filmes em sequência, sem som: Gloss → Celina → Glam'mor Intense. Linhas de capítulo, pausar e som. Parallax |
+| 2 | Barra da coleção | `.subnav`, primeiro item dentro de `<main>` | A coleção · O filme · Perfumes · Gloss labial · Comprar. Acompanha a rolagem, fica clara sobre fundo claro e some no rodapé. No celular vira lista (`#subnav-select`). **Não mova o menu para dentro de uma seção** |
+| 3 | Vídeo do topo | `#hero` | 3 filmes em sequência, sem som: Celina → Glam'mor Intense → Gloss. Linhas de capítulo, pausar e som. Parallax |
 | 4 | Título | `.hero__copy` | "Beleza que revela sua presença" + texto + "Assistir ao filme" |
-| 5 | Conheça | `.triptych` | 3 cards com capa que crescem ao passar o mouse e abrem uma janela no centro: `#d-tons`, `#d-perfumes`, `#d-design` |
+| 5 | Conheça | `.triptych` | 3 cards com capa que crescem ao passar o mouse e abrem uma janela no centro: `#d-perfumes`, `#d-tons`, `#d-design` |
 | 6 | Manifesto | `.manifesto` | Parágrafo centralizado |
 | 7 | O filme | `#filme` | Filme narrado (48 s) com som, ao clicar |
-| 8 | Glosses | `#gloss` | Berry, Chocolate, Prisma com miniatura de vídeo e luz dourada; faixa de vídeo + frase |
-| 9 | Perfumes | `#perfumes` | Glam'mor Intense (com vídeo de fundo desfocado) e Celina; faixa de vídeo + frase |
+| 8 | Perfumes | `#perfumes` | Glam'mor Intense (com vídeo de fundo desfocado) e Celina; faixa de vídeo + frase |
+| 9 | Glosses | `#gloss` | Berry, Chocolate, Prisma com miniatura de vídeo e luz dourada; faixa de vídeo + frase |
 | 10 | Em cena | `#campanha` | 4 painéis que se expandem: 01 Celina, 02 Glam'mor Intense, 03 Três tons (caixas), 04 Chocolate |
 | 11 | Todos os produtos | `#produtos` | Grade em fundo marfim, gerada pelo `site.js` (foto troca ao passar o mouse) |
 | 12 | Contato | `#contato` | WhatsApp, Seja afiliada, Newsletter (Netlify Forms) |
@@ -177,6 +177,8 @@ O verificador confere tudo isso automaticamente, além de todos os links interno
 
 ---
 
+> **Ordem dos produtos:** perfumes vêm sempre antes dos glosses (vídeo do topo, Conheça, seções, menus, grade e rodapé). Ao adicionar um produto novo, siga essa ordem.
+
 ## 7. Informações da marca (confirmadas)
 
 - Slogan: **Beleza que revela sua presença.** (tirado do filme narrado)
@@ -233,6 +235,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v28-titulos-mascara | Títulos grandes sobem por trás de uma máscara, linha por linha, ao aparecer na tela |
 | v29-texto-escrito | Descrições, manifesto e frases se escrevem da esquerda para a direita conforme a rolagem (trocado na v30) |
 | v30-texto-digitado | Descrições, manifesto e frases digitados letra por letra conforme a rolagem, com cursor piscando |
+| v31-perfumes-primeiro | Perfumes antes dos glosses em todo o site: vídeo do topo, Conheça, seções, menus, grade de produtos e rodapé |
 
 > As versões v1 a v3 foram feitas antes do Git. A v8 (vídeos nas janelas do "Conheça") foi testada e desfeita.
 
