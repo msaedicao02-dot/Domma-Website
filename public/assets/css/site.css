@@ -380,3 +380,17 @@ main{position:relative;z-index:1;background:var(--color-noir)}
 .title-mask.is-shown .tw__in{transform:none}
 .title-mask:not(.is-shown) .tw__in{transition-duration:0s;transition-delay:0s!important}
 @media (prefers-reduced-motion:reduce){.title-mask .tw__in{transform:none;transition:none}}
+
+/* ============ Texto digitado com a rolagem ============ */
+/* class="write" num <p> (ou num <span> dentro dele, quando o <p> tem glitter).
+   O site.js divide o texto em letras (.ch) e liga .is-on conforme a rolagem.
+   Letra desligada fica invisível mas ocupa espaço (o texto não pula).
+   O cursor é um traço dourado depois da última letra digitada (.is-caret), piscando.
+   Início/fim da digitação: WRITE_START / WRITE_END no site.js. */
+.typer .wd{white-space:nowrap}
+.typer .ch{opacity:0}
+.typer .ch.is-on{opacity:1}
+.typer .ch.is-caret{position:relative}
+.typer .ch.is-caret::after{content:"";position:absolute;left:100%;top:.12em;bottom:.08em;width:max(1px,.07em);margin-left:.06em;background:var(--color-gold);opacity:1;animation:caret-blink 1s steps(1) infinite}
+@keyframes caret-blink{50%{opacity:0}}
+span.write{display:inline-block}
