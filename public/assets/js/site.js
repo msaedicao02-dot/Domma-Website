@@ -77,6 +77,40 @@
   }, { threshold: [0, 0.3] });
   titles.forEach((h) => titleObserver.observe(h));
 
+  /* ---------- Imagens que surgem ao rolar ----------
+     Fotos e vídeos (blocos de produto, Conheça, Em cena, faixas de vídeo, O filme e grade)
+     surgem de baixo para cima, como uma cortina abrindo, com um leve zoom que assenta.
+     Imagens que entram juntas na tela surgem em sequência (RISE_STAGGER).
+     Quando a imagem sai totalmente da tela, ela se esconde de novo e repete o efeito na volta.
+     Sem JavaScript ou com "reduzir movimento", as imagens aparecem normais. */
+  const RISE_STAGGER = 0.12; // segundos entre imagens que entram juntas
+  const rises = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? [] :
+    [...document.querySelectorAll(".diptych__media, .triptych__media, .scene, .wide, .film__frame, .card__media")];
+  rises.forEach((el) => el.classList.add("img-rise"));
+  // Checagem pela posição na rolagem (o IntersectionObserver não enxerga a moldura fechada pelo clip-path).
+  let riseTick = false;
+  const updateRises = () => {
+    riseTick = false;
+    const vh = window.innerHeight;
+    let n = 0;
+    rises.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.width === 0 && r.height === 0) return; // escondida (ex.: janela fechada)
+      if (r.top < vh * 0.88 && r.bottom > vh * 0.08) {
+        if (!el.classList.contains("is-in")) {
+          el.style.setProperty("--rise-delay", `${(n++) * RISE_STAGGER}s`);
+          el.classList.add("is-in");
+        }
+      } else if (r.bottom < 0 || r.top > vh) el.classList.remove("is-in");
+    });
+  };
+  if (rises.length) {
+    const askRise = () => { if (!riseTick) { riseTick = true; requestAnimationFrame(updateRises); } };
+    window.addEventListener("scroll", askRise, { passive: true });
+    window.addEventListener("resize", askRise);
+    updateRises();
+  }
+
   /* ---------- Texto digitado com a rolagem ----------
      Elementos com class="write" são "digitados" letra por letra, na ordem de leitura,
      conforme a página rola, com um cursor piscando no ponto onde a digitação está.

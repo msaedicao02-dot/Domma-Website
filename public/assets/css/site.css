@@ -394,3 +394,15 @@ main{position:relative;z-index:1;background:var(--color-noir)}
 .typer .ch.is-caret::after{content:"";position:absolute;left:100%;top:.12em;bottom:.08em;width:max(1px,.07em);margin-left:.06em;background:var(--color-gold);opacity:1;animation:caret-blink 1s steps(1) infinite}
 @keyframes caret-blink{50%{opacity:0}}
 span.write{display:inline-block}
+
+/* ============ Imagens que surgem ao rolar ============ */
+/* O site.js põe .img-rise nas molduras de foto/vídeo e liga .is-in quando entram na tela.
+   A moldura abre de baixo para cima (clip-path) e a imagem assenta de um zoom de 1.18.
+   O zoom usa a propriedade "scale" numa animação, para não brigar com o parallax e o blur.
+   Velocidade: 1.4s (cortina) e 1.9s (zoom); atraso entre imagens: RISE_STAGGER no site.js. */
+.img-rise{clip-path:inset(100% 0 0 0)}
+.img-rise.is-in{clip-path:inset(0 0 0 0);transition:clip-path 1.4s cubic-bezier(.77,0,.18,1) var(--rise-delay,0s)}
+.img-rise:not(.is-in) img,.img-rise:not(.is-in) video{scale:1.18}
+.img-rise.is-in img,.img-rise.is-in video{animation:rise-zoom 1.9s cubic-bezier(.22,1,.36,1) var(--rise-delay,0s) both}
+@keyframes rise-zoom{from{scale:1.18}to{scale:1}}
+@media (prefers-reduced-motion:reduce){.img-rise{clip-path:none}.img-rise img,.img-rise video{scale:none;animation:none}}
