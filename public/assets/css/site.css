@@ -67,7 +67,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .icon-btn{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--color-line-gold-strong);border-radius:var(--radius-round);color:var(--color-gold);transition:border-color var(--dur) var(--ease)}
 .icon-btn:hover{border-color:var(--color-gold)}
 .icon-btn .icon{width:16px;height:16px}
-.hero__copy .btn-link{margin-top:var(--space-6)}
+.hero__copy .btn-link{margin-top:0}
 .hero__copy{max-width:var(--measure-lead);margin:var(--space-24) auto 0}
 .hero__copy .t-display-xl{margin-bottom:var(--space-8)}
 .hero__copy .t-caption{margin-top:var(--space-5);opacity:.85}
@@ -326,8 +326,9 @@ main{position:relative;z-index:1;background:var(--color-noir)}
    então as fotos ficam sempre nítidas. Intensidade: --photo-blur. */
 @media (hover:hover) and (pointer:fine){
   :root{--photo-blur:6px}
-  .diptych__media img,.scene img{filter:blur(var(--photo-blur));transition:filter .6s var(--ease),transform 1.2s var(--ease)}
-  .diptych__media:hover img,.scene:hover img,.scene:focus-within img{filter:none}
+  /* Fotos dos produtos (.diptych__media) ficam sempre nítidas: o cliente precisa ver o que compra. */
+  .scene img{filter:blur(var(--photo-blur));transition:filter .6s var(--ease),transform 1.2s var(--ease)}
+  .scene:hover img,.scene:focus-within img{filter:none}
   .triptych__media img{filter:brightness(.42) blur(var(--photo-blur));transition:filter .6s var(--ease)}
   .triptych__item:hover .triptych__media img,.triptych__item:focus-within .triptych__media img{filter:brightness(.62)}
 }
@@ -406,3 +407,34 @@ span.write{display:inline-block}
 .img-rise.is-in img,.img-rise.is-in video{animation:rise-zoom 1.9s cubic-bezier(.22,1,.36,1) var(--rise-delay,0s) both}
 @keyframes rise-zoom{from{scale:1.18}to{scale:1}}
 @media (prefers-reduced-motion:reduce){.img-rise{clip-path:none}.img-rise img,.img-rise video{scale:none;animation:none}}
+
+/* ============ Versão comercial: compra, preço, presente e barra fixa ============ */
+/* Botão dourado (comprar). Preços, links e cupom vêm do LOJA no topo do site.js. */
+.btn-solid--gold{gap:var(--space-2);background:var(--color-gold);color:var(--color-noir)}
+.btn-solid--gold .icon{width:16px;height:16px}
+.btn-solid--gold:focus-visible{outline:2px solid var(--color-gold);outline-offset:3px}
+.hero__ctas{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:var(--space-4) var(--space-8);margin-top:var(--space-8)}
+.hero__gift{margin-top:var(--space-5);opacity:.8;letter-spacing:.5px}
+.diptych__price{font-family:var(--font-display);font-size:26px;letter-spacing:2px;color:var(--color-gold);margin-bottom:var(--space-6)!important}
+.card__price{font-family:var(--font-display);font-size:18px;letter-spacing:1px;color:var(--color-ink)}
+.card .card__buy{margin-top:var(--space-2);height:42px;padding:0 var(--space-6)}
+
+/* Presente no fim da página (cupom) */
+.gift{position:relative;isolation:isolate;background:var(--color-noir);padding:var(--section-y) var(--gutter);border-top:1px solid var(--color-line-gold)}
+.gift__inner{max-width:var(--measure-lead);margin:0 auto}
+.gift__inner .t-display-l{margin:var(--space-4) 0 var(--space-5)}
+.gift__code{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:var(--space-3);margin:var(--space-8) 0 var(--space-3)}
+.gift__value{display:inline-flex;align-items:center;height:48px;padding:0 var(--space-8);border:1px dashed var(--color-gold);font-family:var(--font-display);font-size:22px;letter-spacing:4px;color:var(--color-gold)}
+.gift .form-note{min-height:20px;margin-bottom:var(--space-6)}
+
+/* Barra de compra fixa (só no celular/tablet) */
+.buybar{display:none}
+@media (max-width:960px){
+  .buybar{position:fixed;left:0;right:0;bottom:0;z-index:var(--z-header);display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);padding:var(--space-3) var(--gutter) calc(var(--space-3) + env(safe-area-inset-bottom));background:rgba(0,0,0,.92);border-top:1px solid var(--color-line-gold);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--color-gold);font-size:var(--fs-small);transform:translateY(110%);transition:transform .45s var(--ease)}
+  .buybar.is-on{transform:none}
+  .buybar b{font-family:var(--font-display);font-weight:400;letter-spacing:2px;margin-right:var(--space-2)}
+  .buybar .btn-solid{height:42px;padding:0 var(--space-6)}
+}
+@media (prefers-reduced-motion:reduce){.buybar{transition:none}}
+/* Celular: fotos dos produtos um pouco mais baixas (quadradas) para a página ficar mais curta */
+@media (max-width:600px){.diptych__media{aspect-ratio:1/1}.diptych{padding-bottom:var(--space-10)}}

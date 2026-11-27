@@ -73,7 +73,8 @@ if (existsSync(tplDir)) {
 const ids = ["hero", "hero-pause", "hero-sound", "film-video", "film-play", "player",
   "grid", "newsletter", "form-note", "subnav-select",
   "colecao", "filme", "gloss", "perfumes", "campanha", "produtos", "contato",
-  "d-tons", "d-perfumes", "d-design", "mnav", "conteudo"];
+  "d-tons", "d-perfumes", "d-design", "mnav", "conteudo",
+  "presente", "gift-copy", "gift-note", "news-alt", "buybar"];
 let idErr = 0;
 ids.forEach((id) => { if (!html.includes(`id="${id}"`)) { idErr++; fail(`id="${id}" sumiu do HTML (o JavaScript precisa dele)`); } });
 const hooks = [
@@ -84,7 +85,9 @@ const hooks = [
   ['class="autoloop"', 1, "faixas de vídeo em loop"],
   ['class="scene"', 3, "painéis do Em cena"],
   ['class="glitter', 1, "glitter dourado"],
-  ["data-mnav-open", 1, "botão do menu (celular)"]
+  ["data-mnav-open", 1, "botão do menu (celular)"],
+  ["data-buy=", 5, "botões Comprar dos produtos"],
+  ["data-price=", 5, "preços dos produtos"]
 ];
 hooks.forEach(([needle, min, what]) => {
   const n = html.split(needle).length - 1;

@@ -1,13 +1,50 @@
 {
-  /* ---------- Produtos (edite aqui: nome, descrição, foto, link) ---------- */
+  /* =====================================================================
+     LOJA: tudo o que é comercial fica aqui (preços, links, cupom, contatos).
+     Para trocar um preço ou um link, edite SÓ este bloco.
+     ATENÇÃO: os preços e o cupom abaixo são FICTÍCIOS (provisórios).
+     ===================================================================== */
+  const LOJA = {
+    // link = página de compra do produto (loja, Shopee, Kiwify…). Vazio = usa o WhatsApp ou o Instagram.
+    produtos: {
+      glammor:   { nome: "Glam'mor Intense",          preco: "R$ 179,90", link: "" },
+      celina:    { nome: "Celina",                    preco: "R$ 149,90", link: "" },
+      berry:     { nome: "Gloss Labial 01 Berry",     preco: "R$ 39,90",  link: "" },
+      chocolate: { nome: "Gloss Labial 02 Chocolate", preco: "R$ 39,90",  link: "" },
+      prisma:    { nome: "Gloss Labial 03 Prisma",    preco: "R$ 39,90",  link: "" }
+    },
+    whatsapp: "",           // só números, com 55 e DDD. Ex.: "5511999999999"
+    instagram: "https://www.instagram.com/dommaoficiall/",
+    afiliada: "",           // link da página/formulário para afiliadas
+    cupom: { codigo: "BEMVINDA10", titulo: "10% off na primeira compra" },
+    newsletterUrl: "",      // endereço do serviço de e-mail (ex.: Formspree). Vazio = mostra o Instagram
+    clarityId: "",          // ID do projeto no Microsoft Clarity (mapa de rolagem). Vazio = desligado
+    vercelAnalytics: true   // ligue "Web Analytics" no painel da Vercel para ver as visitas
+  };
+
+  // Para onde vai um clique em "Comprar": link do produto > WhatsApp com mensagem > Instagram.
+  const buyUrl = (key) => {
+    const p = LOJA.produtos[key];
+    if (p && p.link) return p.link;
+    if (LOJA.whatsapp) return `https://wa.me/${LOJA.whatsapp}?text=${encodeURIComponent(`Olá! Quero comprar ${p ? p.nome : "produtos DOMMA"}.`)}`;
+    return LOJA.instagram;
+  };
+  const setLink = (a, url) => {
+    a.href = url;
+    if (/^https?:/.test(url)) { a.target = "_blank"; a.rel = "noopener"; }
+  };
+  const toNumber = (preco) => parseFloat(preco.replace(/[^\d,]/g, "").replace(",", "."));
+  const fromPrice = Object.values(LOJA.produtos).reduce((min, p) => (toNumber(p.preco) < toNumber(min) ? p.preco : min), Object.values(LOJA.produtos)[0].preco);
+
+  /* ---------- Produtos da grade (nome, descrição, foto) ---------- */
   const products = [
-    // img = foto principal do produto; hover = foto que aparece ao passar o mouse
-    { name: "Glam'mor Intense", desc: "Eau de Parfum · 100 ml", img: "assets/img/glammor-maos-2.jpg", pos: "50% 50%", hover: "assets/img/modelo-glammor-spray.jpg", hpos: "45% 35%" },
-    { name: "Celina", desc: "Eau de Parfum · 75 ml", img: "assets/img/celina-detalhe.jpg", pos: "50% 65%", hover: "assets/img/celina-modelo-1.jpg", hpos: "50% 28%" },
-    { name: "Gloss Labial 01 Berry", desc: "Vermelho · 5,5 g", img: "assets/img/gloss-berry-mao.jpg", pos: "50% 45%", hover: "assets/img/modelo-gloss-berry.jpg", hpos: "50% 40%" },
-    { name: "Gloss Labial 02 Chocolate", desc: "Marrom cintilante · 5,5 g", img: "assets/img/gloss-chocolate-mao.jpg", pos: "55% 45%", hover: "assets/img/chocolate-aplicacao.jpg", hpos: "50% 12%" },
-    { name: "Gloss Labial 03 Prisma", desc: "Azul cintilante · 5,5 g", img: "assets/img/gloss-prisma-mao.jpg", pos: "50% 50%", hover: "assets/img/modelo-gloss-prisma.jpg", hpos: "50% 60%" }
-  ];
+    // key = produto no LOJA (preço e link); img = foto principal; hover = foto ao passar o mouse
+    { key: "glammor", desc: "Eau de Parfum · 100 ml", img: "assets/img/glammor-maos-2.jpg", pos: "50% 50%", hover: "assets/img/modelo-glammor-spray.jpg", hpos: "45% 35%" },
+    { key: "celina", desc: "Eau de Parfum · 75 ml", img: "assets/img/celina-detalhe.jpg", pos: "50% 65%", hover: "assets/img/celina-modelo-1.jpg", hpos: "50% 28%" },
+    { key: "berry", desc: "Vermelho · 5,5 g", img: "assets/img/gloss-berry-mao.jpg", pos: "50% 45%", hover: "assets/img/modelo-gloss-berry.jpg", hpos: "50% 40%" },
+    { key: "chocolate", desc: "Marrom cintilante · 5,5 g", img: "assets/img/gloss-chocolate-mao.jpg", pos: "55% 45%", hover: "assets/img/chocolate-aplicacao.jpg", hpos: "50% 12%" },
+    { key: "prisma", desc: "Azul cintilante · 5,5 g", img: "assets/img/gloss-prisma-mao.jpg", pos: "50% 50%", hover: "assets/img/modelo-gloss-prisma.jpg", hpos: "50% 60%" }
+  ].map((p) => ({ ...p, name: LOJA.produtos[p.key].nome, price: LOJA.produtos[p.key].preco }));
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const grid = document.getElementById("grid");
   grid.innerHTML = products.map((p) => `
@@ -18,8 +55,63 @@
       </div>
       <h3 class="t-small">${esc(p.name)}</h3>
       <p class="card__desc">${esc(p.desc)}</p>
-      <a href="#" class="btn-link btn-link--underline">Comprar</a>
+      <p class="card__price">${esc(p.price)}</p>
+      <a href="#" class="btn-solid btn-solid--gold card__buy" data-buy="${esc(p.key)}">Comprar</a>
     </article>`).join("");
+
+  /* ---------- Preços, botões de compra, contatos e cupom (vêm do LOJA) ---------- */
+  document.querySelectorAll("[data-price]").forEach((el) => { el.textContent = LOJA.produtos[el.dataset.price].preco; });
+  document.querySelectorAll("[data-from]").forEach((el) => { el.textContent = fromPrice; });
+  document.querySelectorAll("[data-buy]").forEach((a) => setLink(a, buyUrl(a.dataset.buy)));
+  document.querySelectorAll("[data-whats]").forEach((a) => setLink(a, LOJA.whatsapp ? `https://wa.me/${LOJA.whatsapp}` : LOJA.instagram));
+  document.querySelectorAll("[data-afiliada]").forEach((a) => setLink(a, LOJA.afiliada || (LOJA.whatsapp ? `https://wa.me/${LOJA.whatsapp}?text=${encodeURIComponent("Olá! Quero ser afiliada DOMMA.")}` : LOJA.instagram)));
+  document.querySelectorAll("[data-cupom]").forEach((el) => { el.textContent = LOJA.cupom.codigo; });
+  document.querySelectorAll("[data-cupom-titulo]").forEach((el) => { el.textContent = LOJA.cupom.titulo; });
+  const giftBtn = document.getElementById("gift-copy");
+  const giftNote = document.getElementById("gift-note");
+  if (giftBtn) giftBtn.addEventListener("click", () => {
+    const done = () => { giftNote.textContent = `Cupom ${LOJA.cupom.codigo} copiado. É só colar ao finalizar a compra.`; };
+    if (navigator.clipboard) navigator.clipboard.writeText(LOJA.cupom.codigo).then(done, () => { giftNote.textContent = `Seu cupom: ${LOJA.cupom.codigo}`; });
+    else giftNote.textContent = `Seu cupom: ${LOJA.cupom.codigo}`;
+  });
+
+  /* ---------- Medição de visitas ----------
+     Vercel Web Analytics (ligar no painel da Vercel) e Microsoft Clarity (mapa de rolagem e cliques). */
+  const isLive = /^https?:$/.test(location.protocol) && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  if (isLive && LOJA.vercelAnalytics && !/netlify/.test(location.hostname)) {
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    const va = document.createElement("script"); va.defer = true; va.src = "/_vercel/insights/script.js"; document.head.appendChild(va);
+  }
+  if (isLive && LOJA.clarityId) {
+    (function (c, l, a, r, i) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      const t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+      const y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", LOJA.clarityId);
+  }
+
+  /* ---------- Barra de compra (celular) ----------
+     Aparece depois do vídeo do topo; some na grade, no presente, no contato e no fim da página.
+     (O rodapé fica sempre atrás da página, por isso o "fim" é a faixa .breadcrumb.) */
+  const buybar = document.getElementById("buybar");
+  if (buybar) {
+    const hideZones = ["produtos", "presente", "contato"].map((id) => document.getElementById(id)).concat(document.querySelector(".breadcrumb")).filter(Boolean);
+    const heroEl = document.getElementById("colecao");
+    let barTick = false;
+    const updateBar = () => {
+      barTick = false;
+      const vh = window.innerHeight;
+      const pastHero = heroEl.getBoundingClientRect().bottom < vh * 0.4;
+      const inZone = hideZones.some((z) => { const r = z.getBoundingClientRect(); return r.top < vh - 40 && r.bottom > 0; });
+      const show = pastHero && !inZone;
+      buybar.classList.toggle("is-on", show);
+      buybar.setAttribute("aria-hidden", show ? "false" : "true");
+      buybar.querySelector("a").tabIndex = show ? 0 : -1;
+    };
+    window.addEventListener("scroll", () => { if (!barTick) { barTick = true; requestAnimationFrame(updateBar); } }, { passive: true });
+    window.addEventListener("resize", updateBar);
+    updateBar();
+  }
 
   /* ---------- Revelar ao rolar ---------- */
   const revealObserver = new IntersectionObserver((entries) => {
@@ -180,10 +272,12 @@
 
   /* ---------- HERO: filmes em sequência (sem som; botão para ativar) ---------- */
   const clips = [
-    { src: "assets/video/celina.mp4", poster: "assets/img/poster-celina.jpg" },
-    { src: "assets/video/intense.mp4", poster: "assets/img/poster-intense.jpg" },
-    { src: "assets/video/gloss.mp4", poster: "assets/img/poster-gloss.jpg" }
+    // srcM = versão mais leve (720p) usada em telas de até 900 px (celular)
+    { src: "assets/video/celina.mp4", srcM: "assets/video/celina-m.mp4", poster: "assets/img/poster-celina.jpg" },
+    { src: "assets/video/intense.mp4", srcM: "assets/video/intense-m.mp4", poster: "assets/img/poster-intense.jpg" },
+    { src: "assets/video/gloss.mp4", srcM: "assets/video/gloss-m.mp4", poster: "assets/img/poster-gloss.jpg" }
   ];
+  const smallScreen = window.matchMedia("(max-width: 900px)").matches;
   const hero = document.getElementById("hero");
   const layers = [...hero.querySelectorAll("video")];
   const chapters = [...hero.querySelectorAll(".chapter")];
@@ -197,7 +291,7 @@
     c.querySelector("i").style.width = i < idx ? "100%" : "0";
   });
   const tryPlay = (v) => { if (!paused && inView) v.play().catch(() => {}); };
-  const load = (v, n) => { v.src = clips[n].src; v.poster = clips[n].poster; v.muted = muted; v.currentTime = 0; };
+  const load = (v, n) => { v.src = smallScreen && clips[n].srcM ? clips[n].srcM : clips[n].src; v.poster = clips[n].poster; v.muted = muted; v.currentTime = 0; };
   const goTo = (n) => {
     const prev = layers[active];
     active = 1 - active;
@@ -453,11 +547,17 @@
   });
   if (window.matchMedia("(max-width: 960px)").matches && scenes[0]) openScene(scenes[0]);
 
-  /* ---------- Newsletter (Netlify Forms) ----------
-     No Netlify, a inscrição vai para o painel "Forms" do site.
-     Fora do Netlify (abrindo o arquivo no computador) mostra um aviso. */
+  /* ---------- Newsletter ----------
+     Envia para LOJA.newsletterUrl (ex.: Formspree). No Netlify, sem endereço, usa o Netlify Forms.
+     Sem nenhum dos dois (ex.: na Vercel hoje), o formulário some e aparece o convite do Instagram. */
   const form = document.getElementById("newsletter");
   const note = document.getElementById("form-note");
+  const newsEndpoint = LOJA.newsletterUrl || (/netlify/.test(location.hostname) ? "/" : "");
+  if (!newsEndpoint) {
+    form.hidden = true;
+    const alt = document.getElementById("news-alt");
+    if (alt) alt.hidden = false;
+  }
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const email = form.email.value.trim();
@@ -467,17 +567,18 @@
       return;
     }
     if (location.protocol === "file:") {
-      note.textContent = "A inscrição funciona quando o site estiver publicado no Netlify.";
+      note.textContent = "A inscrição funciona quando o site estiver publicado.";
       return;
     }
     const btn = form.querySelector("button[type=submit]");
     btn.disabled = true;
     note.textContent = "Enviando…";
-    fetch("/", {
+    const viaNetlify = newsEndpoint === "/";
+    fetch(newsEndpoint, viaNetlify ? {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(new FormData(form)).toString()
-    })
+    } : { method: "POST", headers: { Accept: "application/json" }, body: new FormData(form) })
       .then((r) => {
         if (!r.ok) throw new Error(r.status);
         form.reset();

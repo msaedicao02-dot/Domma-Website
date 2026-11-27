@@ -77,13 +77,15 @@ Conecte o repositório no Netlify. O `netlify.toml` já diz para publicar `publi
 | 5 | Conheça | `.triptych` | 3 cards com capa que crescem ao passar o mouse e abrem uma janela no centro: `#d-perfumes`, `#d-tons`, `#d-design` |
 | 6 | Manifesto | `.manifesto` | Parágrafo centralizado |
 | 7 | O filme | `#filme` | Filme narrado (48 s) com som, ao clicar |
-| 8 | Perfumes | `#perfumes` | Glam'mor Intense (com vídeo de fundo desfocado) e Celina; faixa de vídeo + frase |
-| 9 | Glosses | `#gloss` | Berry, Chocolate, Prisma com miniatura de vídeo e luz dourada; faixa de vídeo + frase |
+| 8 | Perfumes | `#perfumes` | Glam'mor Intense (com vídeo de fundo desfocado) e Celina, cada um com preço e botão Comprar; frase |
+| 9 | Glosses | `#gloss` | Berry, Chocolate, Prisma com miniatura de vídeo e luz dourada, preço e botão Comprar; frase |
 | 10 | Em cena | `#campanha` | 4 painéis que se expandem: 01 Celina, 02 Glam'mor Intense, 03 Três tons (caixas), 04 Chocolate |
-| 11 | Todos os produtos | `#produtos` | Grade em fundo marfim, gerada pelo `site.js` (foto troca ao passar o mouse) |
-| 12 | Contato | `#contato` | WhatsApp, Seja afiliada, Newsletter (Netlify Forms) |
+| 11 | Todos os produtos | `#produtos` | Grade em fundo marfim, gerada pelo `site.js`, com preço e botão Comprar (foto troca ao passar o mouse) |
+| 12 | Presente | `#presente` | "Você chegou ao fim": cupom de boas-vindas com botão Copiar cupom (anunciado no topo da página) |
+| 12b | Contato | `#contato` | WhatsApp, Seja afiliada, Novidades (newsletter ou Instagram) |
 | 13 | Faixa final | `.breadcrumb` (último item do `<main>`) | "DOMMA • Beleza e perfumaria": no fim é a única coisa visível acima do rodapé |
 | 14 | Rodapé | `<footer>` | Ocupa a tela menos a faixa; revelado como cortina |
+| — | Barra de compra | `#buybar` | Só no celular: "DOMMA a partir de R$…" + Comprar, fixa embaixo depois do vídeo do topo; some na grade, no presente, no contato e no fim |
 | — | Player | `#player` | Janela que abre os filmes dos produtos |
 
 ---
@@ -95,17 +97,33 @@ Todos os caminhos abaixo são dentro de `public/`.
 ### Textos
 Edite direto no `index.html`. Títulos grandes ficam em caixa alta automaticamente (não digite em maiúsculas).
 
-### Produtos da grade (nome, descrição, foto)
-Só em `assets/js/site.js`, na lista `products` no topo:
+### Loja: preços, links de compra, WhatsApp, cupom (tudo num lugar só)
+No topo do `assets/js/site.js`, no bloco **`LOJA`**:
 ```js
-{ name: "Celina", desc: "Eau de Parfum · 75 ml", img: "assets/img/celina-detalhe.jpg", pos: "50% 65%", hover: "assets/img/celina-modelo-1.jpg", hpos: "50% 28%" }
+produtos: {
+  glammor: { nome: "Glam'mor Intense", preco: "R$ 179,90", link: "" },
+  ...
+},
+whatsapp: "",        // só números: "5511999999999"
+afiliada: "",        // link para quem quer ser afiliada
+cupom: { codigo: "BEMVINDA10", titulo: "10% off na primeira compra" },
+newsletterUrl: "",   // endereço do serviço de e-mail (ex.: Formspree)
+clarityId: "",       // Microsoft Clarity (mapa de rolagem)
 ```
-`img` = foto principal. `hover` = foto que aparece ao passar o mouse (opcional). `pos` / `hpos` = parte da foto que aparece no quadrado (horizontal vertical).
+- **Os preços e o cupom de hoje são FICTÍCIOS.** Troque antes de divulgar e crie o cupom de verdade na sua loja/checkout.
+- O preço aparece sozinho no bloco do produto, na grade e na barra do celular ("a partir de" = o menor preço).
+- **Para onde vai o botão Comprar:** o `link` do produto; se estiver vazio, abre o WhatsApp com a mensagem "Olá! Quero comprar …"; se o WhatsApp também estiver vazio, abre o Instagram (@dommaoficiall). "Atendimento por WhatsApp" e "Quero ser afiliada" seguem a mesma ideia.
+- Nos blocos de produto, cada botão tem `data-buy="glammor"` (ou `celina`, `berry`, `chocolate`, `prisma`) e o preço fica em `<p class="diptych__price" data-price="...">`. Produto novo: acrescente no `LOJA.produtos` e na lista `products` logo abaixo (com a mesma `key`).
 
-**Preços:** ainda não existem. Para incluir, acrescente `price: "R$ 000,00"` em cada produto e, no `grid.innerHTML`, a linha `<p class="t-small">${esc(p.price)}</p>` depois da descrição.
+### Produtos da grade (descrição e fotos)
+Na lista `products`, logo abaixo do `LOJA`:
+```js
+{ key: "celina", desc: "Eau de Parfum · 75 ml", img: "assets/img/celina-detalhe.jpg", pos: "50% 65%", hover: "assets/img/celina-modelo-1.jpg", hpos: "50% 28%" }
+```
+`key` = produto no `LOJA` (de onde vêm nome, preço e link). `img` = foto principal. `hover` = foto que aparece ao passar o mouse (opcional). `pos` / `hpos` = parte da foto que aparece no quadrado (horizontal vertical).
 
-### Links (comprar, WhatsApp, redes, afiliada)
-Procure por `href="#"` no `index.html` e no `assets/js/site.js` e troque pelo link real. Enquanto estiverem com `#`, clicar neles não faz nada (não pula para o topo). O verificador mostra quantos ainda faltam.
+### Outros links (conta, favoritos, rodapé, TikTok)
+Procure por `href="#"` no `index.html` e troque pelo link real. Enquanto estiverem com `#`, clicar neles não faz nada (não pula para o topo). O verificador mostra quantos ainda faltam.
 
 ### Trocar uma foto
 Substitua o arquivo em `assets/img/` **mantendo o mesmo nome**. Tamanho recomendado: 1600 px no lado maior, JPG qualidade ~80. Para ajustar o enquadramento, mude o `style="object-position:50% 40%"` da imagem.
@@ -141,15 +159,19 @@ Janelas: são os `<dialog class="drawer" id="d-...">` logo depois. Cada uma tem 
 Vitrine com cores, tipografia, botões e componentes. Lê `../public/assets/css/tokens.css`, então mudar uma cor no `tokens.css` muda o site e a vitrine juntos. Se mover a página de pasta, ajuste o `href` do `<link>` no topo e rode o verificador.
 
 ### Newsletter
-Usa o **Netlify Forms** (`data-netlify="true"` no `<form id="newsletter">`). No site publicado, a inscrição é enviada e aparece "Inscrição feita. Obrigada!". Há um campo escondido anti-spam (`empresa`). Abrindo o arquivo no computador, aparece um aviso de que só funciona publicado.
+O formulário envia para `LOJA.newsletterUrl` (ex.: um formulário do Formspree, que manda as inscrições para o seu e-mail). **Na Vercel o Netlify Forms não funciona**, então, enquanto o endereço estiver vazio, o formulário some e no lugar aparece "Novidades: Seguir @dommaoficiall" (`#news-alt`). Publicado no Netlify, sem endereço, ele volta a usar o Netlify Forms. Há um campo escondido anti-spam (`empresa`).
+
+### Medir até onde as clientes rolam
+- **Vercel Web Analytics:** no painel da Vercel, abra o projeto → *Analytics* → *Enable*. O site já carrega o script sozinho (`LOJA.vercelAnalytics`). Mostra visitas, páginas e de onde vieram.
+- **Microsoft Clarity (grátis):** crie um projeto em clarity.microsoft.com com o endereço do site, copie o *Project ID* e cole em `LOJA.clarityId`. Mostra o mapa de rolagem (até onde cada pessoa desceu), cliques e gravações das visitas.
 
 ---
 
 ## 5. O que o JavaScript precisa (NÃO renomear nem apagar)
 
-**IDs:** `hero`, `hero-pause`, `hero-sound`, `film-video`, `film-play`, `player`, `grid`, `newsletter`, `form-note`, `subnav-select`, `colecao`, `filme`, `gloss`, `perfumes`, `campanha`, `produtos`, `contato`, `d-tons`, `d-perfumes`, `d-design`, `mnav`, `conteudo`.
+**IDs:** `hero`, `hero-pause`, `hero-sound`, `film-video`, `film-play`, `player`, `grid`, `newsletter`, `form-note`, `subnav-select`, `colecao`, `filme`, `gloss`, `perfumes`, `campanha`, `produtos`, `contato`, `d-tons`, `d-perfumes`, `d-design`, `mnav`, `conteudo`, `presente`, `gift-copy`, `gift-note`, `news-alt`, `buybar`.
 
-**Classes e atributos:** `.chapter` + `data-i`, `data-drawer`, `data-close`, `data-mnav-open`, `.vthumb` (+ `.vthumb__fill`, `.vthumb__glow`), `data-film`, `video.autoloop`, `.scene` (+ `.scene__text`, `.scene__num`, `.scene__title`, `.scene__desc`, classe `.is-open`), `.subnav`, `.subnav__item`, `.glitter`, `.reveal`, `.hero__media video`, `.diptych__media img`, `.triptych__media img`, `.wide video` (parallax).
+**Classes e atributos:** `.chapter` + `data-i`, `data-drawer`, `data-close`, `data-mnav-open`, `.vthumb` (+ `.vthumb__fill`, `.vthumb__glow`), `data-film`, `video.autoloop`, `.scene` (+ `.scene__text`, `.scene__num`, `.scene__title`, `.scene__desc`, classe `.is-open`), `.subnav`, `.subnav__item`, `.glitter`, `.reveal`, `.hero__media video`, `.diptych__media img`, `.triptych__media img`, `.wide video` (parallax); `data-buy`, `data-price`, `data-from`, `data-whats`, `data-afiliada`, `data-cupom`, `data-cupom-titulo` (preenchidos pelo `LOJA`).
 
 O verificador confere tudo isso automaticamente, além de todos os links internos `#secao`.
 
@@ -158,13 +180,13 @@ O verificador confere tudo isso automaticamente, além de todos os links interno
 ## 6. Efeitos (como funcionam)
 
 - **Fontes:** títulos grandes, logo DOMMA e menu do celular usam **Dafora** (`--font-display`, arquivos em `assets/fonts/`, declarada no `tokens.css`); o resto usa Montserrat (`--font-sans`). Para trocar a fonte dos títulos, mude `--font-display` no `tokens.css`.
-- **Blur nas fotos:** no computador, as fotos dos blocos de produto, as capas do "Conheça" e os painéis do "Em cena" ficam desfocadas e ficam nítidas ao passar o mouse (0,6 s). No celular e em aparelhos sem mouse ficam sempre nítidas. A grade de produtos e os vídeos não têm blur. Intensidade: `--photo-blur` (6 px) no fim do `site.css`.
+- **Blur nas fotos:** no computador, as capas do "Conheça" e os painéis do "Em cena" ficam desfocadas (as fotos dos blocos de produto ficam sempre nítidas, desde a v33) e ficam nítidas ao passar o mouse (0,6 s). No celular e em aparelhos sem mouse ficam sempre nítidas. A grade de produtos e os vídeos não têm blur. Intensidade: `--photo-blur` (6 px) no fim do `site.css`.
 - **Vídeo do topo:** dois `<video>` sobrepostos que se alternam com fade; começa sem som (os navegadores bloqueiam som automático); pausa quando sai da tela.
 - **Parallax:** a mídia anda mais devagar que a página dentro da moldura (`.px`, amplitude 6% da altura, escala 1,14).
 - **Painéis do Em cena (acordeão):** 4 painéis lado a lado (`.scenes` > `.scene`). No computador, o painel com o mouse se abre (`flex-grow:2.6`, 0,8 s), os outros encolhem, e aparecem o título maior e a descrição. Clicar deixa o painel aberto (`.is-open`). No celular (até 960 px) os painéis ficam empilhados como faixas de 132 px; tocar abre o painel e o primeiro já começa aberto. Para trocar foto/texto, edite cada `<article class="scene">` no `index.html` (`object-position` ajusta o enquadramento). Intensidade: o `2.6` no fim do `site.css`.
-- **Imagens que surgem ao rolar:** as fotos e vídeos dos blocos de produto, do Conheça, do Em cena, das faixas de vídeo, de "O filme" e da grade de produtos surgem de baixo para cima (como uma cortina abrindo) com um leve zoom que assenta, quando chegam na tela. Imagens que entram juntas surgem uma depois da outra. Quando a imagem sai totalmente da tela, ela se esconde e repete o efeito na volta. O vídeo do topo não tem o efeito. O `site.js` põe a classe `.img-rise` nas molduras (lista em `rises`); velocidade da cortina (1.4s) e do zoom (1.9s, de 1.18) no fim do `site.css`; atraso entre imagens: `RISE_STAGGER` (0,12 s) no `site.js`. Com "reduzir movimento", as imagens aparecem normais.
+- **Imagens que surgem ao rolar:** as fotos e vídeos dos blocos de produto, do Conheça, do Em cena, de "O filme" e da grade de produtos surgem de baixo para cima (como uma cortina abrindo) com um leve zoom que assenta, quando chegam na tela. Imagens que entram juntas surgem uma depois da outra. Quando a imagem sai totalmente da tela, ela se esconde e repete o efeito na volta. O vídeo do topo não tem o efeito. O `site.js` põe a classe `.img-rise` nas molduras (lista em `rises`); velocidade da cortina (1.4s) e do zoom (1.9s, de 1.18) no fim do `site.css`; atraso entre imagens: `RISE_STAGGER` (0,12 s) no `site.js`. Com "reduzir movimento", as imagens aparecem normais.
 - **Títulos que sobem por trás de uma máscara:** todos os títulos grandes (`.t-display-xl` e `.t-display-l`, inclusive os das janelas do Conheça) entram subindo de baixo para cima, cortados na linha, uma linha depois da outra, quando aparecem na tela. Quando o título sai totalmente da tela, ele se esconde de novo e repete o efeito na volta. O `site.js` divide o título em palavras (`<span class="tw"><span class="tw__in">`) e guarda o texto original no `aria-label`. Velocidade: `1.2s` em `.title-mask .tw__in` no fim do `site.css`; atraso entre linhas: `LINE_DELAY` (0,14 s) no `site.js`. Para tirar o efeito de um título, troque a classe dele por outra ou remova-o da busca `.t-display-xl, .t-display-l` no `site.js`. Escreva os títulos como texto simples (pode usar `<br>`), sem `<span>` dentro.
-- **Texto digitado com a rolagem:** textos com `class="write"` são digitados letra por letra conforme a página rola, com um cursor dourado piscando onde a digitação está; parou de rolar, a digitação para; rolando para cima, o texto é apagado de trás para frente. Está nas descrições dos 3 glosses e dos 2 perfumes, no manifesto e nas 2 frases grandes ("Do toque do gloss..." e "Uma presença que fica na memória"). Num `<p>` simples, ponha `class="write"` no próprio `<p>`; quando o `<p>` tem glitter dentro, ponha o texto num `<span class="write">` (senão o glitter é apagado junto). Escreva só texto simples dentro (sem `<strong>`/links). Começo e fim da digitação: `WRITE_START` (0.95) e `WRITE_END` (0.42) no `site.js`, posições na altura da tela (diminuir o `WRITE_END` deixa a digitação mais lenta). Cursor: `.typer .ch.is-caret::after` no fim do `site.css`.
+- **Texto digitado com a rolagem:** textos com `class="write"` são digitados letra por letra conforme a página rola, com um cursor dourado piscando onde a digitação está; parou de rolar, a digitação para; rolando para cima, o texto é apagado de trás para frente. Está no manifesto e nas 2 frases grandes (as descrições dos produtos ficam legíveis na hora, desde a v33) ("Do toque do gloss..." e "Uma presença que fica na memória"). Num `<p>` simples, ponha `class="write"` no próprio `<p>`; quando o `<p>` tem glitter dentro, ponha o texto num `<span class="write">` (senão o glitter é apagado junto). Escreva só texto simples dentro (sem `<strong>`/links). Começo e fim da digitação: `WRITE_START` (0.95) e `WRITE_END` (0.42) no `site.js`, posições na altura da tela (diminuir o `WRITE_END` deixa a digitação mais lenta). Cursor: `.typer .ch.is-caret::after` no fim do `site.css`.
 - **Vídeo de fundo desfocado (Glam'mor Intense):** o bloco do perfume na seção Perfumes tem `class="diptych diptych--bg"` e um `<div class="diptych__bg">` com o vídeo `glammor-fundo.mp4`. O desfoque já vem gravado no vídeo (mais leve para o celular). A força é a `opacity` (0.38) em `.diptych__bg video` no fim do `site.css`; as bordas de cima e de baixo somem no preto. Toca só quando aparece na tela. Para usar em outro produto, copie o `<div class="diptych__bg">`, acrescente `diptych--bg` no `<article>` e gere o vídeo com:
   `ffmpeg -i ORIGINAL.mp4 -an -filter_complex "[0:v]scale=960:-2,gblur=sigma=9,split[a][b];[b]reverse[r];[a][r]concat=n=2:v=1:a=0,format=yuv420p" -r 24 -c:v libx264 -preset veryfast -crf 30 -movflags +faststart assets/video/NOME-fundo.mp4`
 - **Cards do Conheça crescem ao passar o mouse:** no computador, o card em foco fica mais largo (`flex-grow:1.32`, 0,7 s) e os outros encolhem. No celular ficam empilhados. Intensidade: o `1.32` em `.triptych__item:hover` no `site.css`.
@@ -190,11 +212,15 @@ O verificador confere tudo isso automaticamente, além de todos os links interno
 
 ## 8. Pendências antes de divulgar
 
-- [ ] Preços dos 5 produtos
+- [ ] **Preços reais** dos 5 produtos (hoje são fictícios, no `LOJA` do `site.js`)
+- [ ] **Links de compra** de cada produto e **número do WhatsApp** (no `LOJA`)
+- [ ] **Cupom de verdade** criado no checkout (hoje `BEMVINDA10` é fictício)
+- [ ] Endereço da newsletter (`LOJA.newsletterUrl`) e ID do Clarity (`LOJA.clarityId`)
+- [ ] Notas olfativas dos perfumes, frete e formas de pagamento
+- [ ] Confirmar o rótulo do Celina (foto diz "Desodorante Colônia 100ML", site diz Eau de Parfum 75 ml)
 - [ ] Logo oficial em SVG/PNG (hoje é "DOMMA" em texto)
 - [x] Instagram (@dommaoficiall) no rodapé
 - [ ] Links: checkout/comprar, WhatsApp, TikTok, "Seja afiliada", conta, favoritos e links do rodapé (o verificador mostra quantos faltam)
-- [ ] Ativar "Form detection" no Netlify para a newsletter
 - [ ] Domínio próprio e `og:image` com endereço completo
 - [ ] Razão social, CNPJ e endereço no rodapé
 - [ ] Revisar os textos dos produtos
@@ -238,6 +264,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v30-texto-digitado | Descrições, manifesto e frases digitados letra por letra conforme a rolagem, com cursor piscando |
 | v31-perfumes-primeiro | Perfumes antes dos glosses em todo o site: vídeo do topo, Conheça, seções, menus, grade de produtos e rodapé |
 | v32-imagens-surgem | Fotos e vídeos surgem de baixo para cima com zoom suave ao rolar |
+| v33-versao-comercial | Preços (fictícios) e botão Comprar em cada produto, "Comprar agora" no topo, barra de compra no celular, presente/cupom no fim, fotos de produto nítidas, descrições sem digitação, sem as faixas de vídeo, vídeos do topo leves no celular, newsletter sem erro na Vercel, Vercel Analytics e Clarity prontos |
 
 > As versões v1 a v3 foram feitas antes do Git. A v8 (vídeos nas janelas do "Conheça") foi testada e desfeita.
 
