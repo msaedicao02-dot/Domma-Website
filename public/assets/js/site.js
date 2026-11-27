@@ -77,6 +77,59 @@
   }, { threshold: [0, 0.3] });
   titles.forEach((h) => titleObserver.observe(h));
 
+  /* ---------- Texto digitado com a rolagem ----------
+     Elementos com class="write" são "digitados" letra por letra, na ordem de leitura,
+     conforme a página rola, com um cursor piscando no ponto onde a digitação está.
+     Parou de rolar, a digitação para; rolando para cima, o texto é apagado de trás para frente.
+     Começa quando o topo do texto chega a WRITE_START da altura da tela e termina em WRITE_END.
+     As letras escondidas continuam ocupando espaço, então o layout não pula.
+     Leitores de tela recebem o texto inteiro (cópia escondida .sr).
+     Sem JavaScript ou com "reduzir movimento", o texto fica normal. */
+  const WRITE_START = 0.95, WRITE_END = 0.42;
+  const writes = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? [] : [...document.querySelectorAll(".write")];
+  const typers = writes.map((el) => {
+    const text = el.textContent.replace(/\s+/g, " ").trim();
+    const sr = document.createElement("span");
+    sr.className = "sr"; sr.textContent = text;
+    const vis = document.createElement("span");
+    vis.setAttribute("aria-hidden", "true");
+    const chars = [];
+    text.split(/(\s)/).forEach((w) => {
+      if (w === " ") { const c = document.createElement("span"); c.className = "ch"; c.textContent = " "; vis.appendChild(c); chars.push(c); return; }
+      if (!w) return;
+      const word = document.createElement("span"); word.className = "wd"; // palavra não quebra no meio
+      [...w].forEach((l) => { const c = document.createElement("span"); c.className = "ch"; c.textContent = l; word.appendChild(c); chars.push(c); });
+      vis.appendChild(word);
+    });
+    el.replaceChildren(sr, vis);
+    el.classList.add("typer");
+    return { el, chars, shown: -1 };
+  });
+  if (typers.length) {
+    let writeTick = false;
+    const updateWrites = () => {
+      writeTick = false;
+      const vh = window.innerHeight;
+      const start = vh * WRITE_START, end = vh * WRITE_END;
+      typers.forEach((t) => {
+        const top = t.el.getBoundingClientRect().top;
+        const p = Math.min(1, Math.max(0, (start - top) / (start - end)));
+        const n = Math.round(p * t.chars.length);
+        if (n === t.shown) return;
+        const from = Math.min(n, t.shown < 0 ? 0 : t.shown), to = Math.max(n, t.shown < 0 ? t.chars.length : t.shown);
+        for (let k = from; k < to; k++) t.chars[k].classList.toggle("is-on", k < n);
+        t.chars.forEach((c) => c.classList.remove("is-caret"));
+        if (n > 0 && n < t.chars.length) t.chars[n - 1].classList.add("is-caret");
+        t.el.classList.toggle("is-typing", n > 0 && n < t.chars.length);
+        t.shown = n;
+      });
+    };
+    const askWrite = () => { if (!writeTick) { writeTick = true; requestAnimationFrame(updateWrites); } };
+    window.addEventListener("scroll", askWrite, { passive: true });
+    window.addEventListener("resize", askWrite);
+    updateWrites();
+  }
+
   /* ---------- Gavetas do tríptico ---------- */
   document.querySelectorAll("[data-drawer]").forEach((btn) => {
     btn.addEventListener("click", () => {
