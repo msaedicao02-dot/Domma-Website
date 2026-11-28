@@ -59,8 +59,8 @@ Use sempre as variáveis de `tokens.css`. **Nunca escreva HEX direto em componen
 ## 3. Tipografia
 
 **Títulos e logo (`--font-display`):** `Dafora`, fonte da marca, um peso só (400). Arquivos em `public/assets/fonts/` (`.woff` + `.ttf`). Usada em `display-xl`, `display-l`, `display-m`, no logo DOMMA (cabeçalho e rodapé) e no menu do celular.
-**Textos (`--font-sans`):** `Montserrat` (Google Fonts), pesos 200, 300, 400 e 600: parágrafos, rótulos (eyebrow), botões, menus, grade de produtos.
-**Utilitária:** `Helvetica Neue / Arial` (sistema), só no rodapé e em formulários.
+**Textos (`--font-sans`):** `DM Sans` (Google Fonts), pesos 200 a 600: parágrafos, rótulos (eyebrow), botões, menus, grade de produtos.
+**Utilitária (`--font-utility`):** também `DM Sans` (rodapé, contato e formulários), com Helvetica Neue / Arial de reserva.
 ❌ Não baixe nem use fontes proprietárias de marcas.
 
 | Estilo | Desktop (tam/altura/espaçamento) | Mobile | Peso | Caixa | Uso |

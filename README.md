@@ -179,7 +179,7 @@ O verificador confere tudo isso automaticamente, além de todos os links interno
 
 ## 6. Efeitos (como funcionam)
 
-- **Fontes:** títulos grandes, logo DOMMA e menu do celular usam **Dafora** (`--font-display`, arquivos em `assets/fonts/`, declarada no `tokens.css`); o resto usa Montserrat (`--font-sans`). Para trocar a fonte dos títulos, mude `--font-display` no `tokens.css`.
+- **Fontes:** títulos grandes, logo DOMMA e menu do celular usam **Dafora** (`--font-display`, arquivos em `assets/fonts/`, declarada no `tokens.css`); o resto (parágrafos, rótulos, botões, menus, preços) usa **DM Sans** (`--font-sans`, carregada do Google Fonts pelo `<link>` no `<head>` do `index.html`, do `404.html` e do design system). Para trocar a fonte dos títulos, mude `--font-display` no `tokens.css`.
 - **Blur nas fotos:** no computador, as capas do "Conheça" e os painéis do "Em cena" ficam desfocadas (as fotos dos blocos de produto ficam sempre nítidas, desde a v33) e ficam nítidas ao passar o mouse (0,6 s). No celular e em aparelhos sem mouse ficam sempre nítidas. A grade de produtos e os vídeos não têm blur. Intensidade: `--photo-blur` (6 px) no fim do `site.css`.
 - **Vídeo do topo:** dois `<video>` sobrepostos que se alternam com fade; começa sem som (os navegadores bloqueiam som automático); pausa quando sai da tela.
 - **Parallax:** a mídia anda mais devagar que a página dentro da moldura (`.px`, amplitude 6% da altura, escala 1,14).
@@ -265,6 +265,7 @@ O projeto é um repositório Git. Cada etapa tem uma versão salva (tag).
 | v31-perfumes-primeiro | Perfumes antes dos glosses em todo o site: vídeo do topo, Conheça, seções, menus, grade de produtos e rodapé |
 | v32-imagens-surgem | Fotos e vídeos surgem de baixo para cima com zoom suave ao rolar |
 | v33-versao-comercial | Preços (fictícios) e botão Comprar em cada produto, "Comprar agora" no topo, barra de compra no celular, presente/cupom no fim, fotos de produto nítidas, descrições sem digitação, sem as faixas de vídeo, vídeos do topo leves no celular, newsletter sem erro na Vercel, Vercel Analytics e Clarity prontos |
+| v34-fonte-dm-sans | Textos menores (parágrafos, rótulos, botões, menus, preços, contato e rodapé) em DM Sans no lugar da Montserrat |
 
 > As versões v1 a v3 foram feitas antes do Git. A v8 (vídeos nas janelas do "Conheça") foi testada e desfeita.
 
